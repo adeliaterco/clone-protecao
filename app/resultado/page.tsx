@@ -315,7 +315,7 @@ export default function ResultPageLadoEscuro() {
 
                       <div className="bg-red-900/40 rounded-lg p-3 border border-red-500/50">
                         <p className="text-red-300 font-bold text-sm">
-                          ⏰ Oferta expira em:
+                          ⏰ Após este prazo, perdemos o desconto de emergência e o preço volta para R$ 97. Não conseguiremos manter este investimento baixo por mais tempo.:
                         </p>
                         <div className="text-2xl font-black text-red-400 mt-2">
                           <CountdownTimer minutes={47} seconds={0} />
