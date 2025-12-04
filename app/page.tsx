@@ -190,28 +190,6 @@ export default function HomePage() {
             background-clip: text;
           }
 
-          .prova-social {
-            color: #dc2626;
-            font-weight: 600;
-            font-size: 16px;
-          }
-
-          .quiz-info {
-            display: flex;
-            justify-content: space-around;
-            margin: 25px 0;
-            padding: 15px;
-            background: rgba(220, 38, 38, 0.1);
-            border-radius: 10px;
-            border: 1px solid rgba(220, 38, 38, 0.3);
-          }
-
-          .quiz-info > div {
-            color: #fff;
-            font-size: 12px;
-            font-weight: 500;
-          }
-
           .btn-iniciar-quiz {
             background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%);
             color: white;
@@ -231,6 +209,7 @@ export default function HomePage() {
             justify-content: center;
             gap: 8px;
             box-shadow: 0 5px 15px rgba(220, 38, 38, 0.3);
+            margin-bottom: 25px;
           }
 
           .btn-iniciar-quiz:hover {
@@ -399,12 +378,6 @@ export default function HomePage() {
               font-size: 14px;
               text-align: center;
             }
-            
-            .quiz-info {
-              flex-direction: column;
-              gap: 8px;
-              text-align: center;
-            }
 
             .btn-iniciar-quiz {
               font-size: 14px;
@@ -565,47 +538,6 @@ export default function HomePage() {
               </ul>
             </div>
 
-            {/* PROVA SOCIAL */}
-            <p className="prova-social">
-              2.847 pais já viram a simulação completa.
-            </p>
-
-            {/* INFO DO QUIZ */}
-            <div className="quiz-info">
-              <div>⏱️ 5 min de imersão</div>
-              <div>🎯 Consciência imediata</div>
-              <div>🔥 Impacto garantido</div>
-            </div>
-
-            {/* AVISOS */}
-            <div className="warning-section">
-              <h3 className="warning-title">AVISOS E CONDIÇÕES:</h3>
-              <ul className="warning-list">
-                <li>⚠️ Esta simulação não contém imagens explícitas, mas apresenta contextos reais que podem ser perturbadores.</li>
-                <li>⚠️ Esta simulação pode ser perturbadora. Use em ambiente adequado.</li>
-              </ul>
-            </div>
-
-            {/* ESCASSEZ */}
-            <div style={{
-              background: 'rgba(220, 38, 38, 0.1)',
-              border: '1px solid rgba(220, 38, 38, 0.4)',
-              borderRadius: '10px',
-              padding: '12px',
-              margin: '15px 0',
-              textAlign: 'center'
-            }}>
-              <div style={{color: '#dc2626', fontSize: '13px', fontWeight: '600'}}>
-                ⚠️ ACESSO LIMITADO HOJE
-              </div>
-              <div style={{color: '#fff', fontSize: '12px', marginTop: '4px'}}>
-                Apenas 100 pais por dia podem acessar a simulação completa
-              </div>
-              <div style={{color: '#dc2626', fontSize: '12px', fontWeight: '600', marginTop: '2px'}}>
-                Spots restantes: 18
-              </div>
-            </div>
-
             {/* CTA */}
             <button 
               onClick={handleStart} 
@@ -621,6 +553,15 @@ export default function HomePage() {
                 </>
               )}
             </button>
+
+            {/* AVISOS */}
+            <div className="warning-section">
+              <h3 className="warning-title">AVISOS E CONDIÇÕES:</h3>
+              <ul className="warning-list">
+                <li>⚠️ Esta simulação não contém imagens explícitas, mas apresenta contextos reais que podem ser perturbadores.</li>
+                <li>⚠️ Esta simulação pode ser perturbadora. Use em ambiente adequado.</li>
+              </ul>
+            </div>
 
             {/* GARANTIA */}
             <div className="garantia-simples">
