@@ -226,11 +226,11 @@ const useRealisticTyping = () => {
     setTypingUsers(prev => [...prev.filter(u => u.id !== user.id), user])
     
     // Simular tempo de digitação baseado no tamanho da mensagem
-    const typingTime = Math.max(1000, message.length * 50) + Math.random() * 1000
+    const typingTime = Math.max(800, message.length * 30) + Math.random() * 500
     
     setTimeout(() => {
       setTypingUsers(prev => prev.filter(u => u.id !== user.id))
-      setTimeout(() => onComplete(message), 300)
+      setTimeout(() => onComplete(message), 200)
     }, typingTime)
   }, [])
 
@@ -335,11 +335,12 @@ const DiscordMessage = ({ message, isNew = false }) => {
   )
 }
 
-// Componente Chat Gaming
-const ChatGamingStep = () => {
+// Componente Chat Gaming - TIMING OTIMIZADO
+const ChatGamingStep = ({ onCanProceed }) => {
   const [displayedMessages, setDisplayedMessages] = useState([])
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
   const [showAlerts, setShowAlerts] = useState(false)
+  const [canProceed, setCanProceed] = useState(false)
   const { typingUsers, startTyping } = useRealisticTyping()
   const messagesEndRef = useRef(null)
 
@@ -360,15 +361,21 @@ const ChatGamingStep = () => {
             
             // Mostrar alertas após mensagem perigosa
             if (currentMessage.type === 'alert') {
-              setTimeout(() => setShowAlerts(true), 1000)
+              setTimeout(() => setShowAlerts(true), 500)
             }
           }
         )
-      }, currentMessageIndex * 2000 + 1000)
+      }, currentMessageIndex * 800 + 500) // ACELERADO: era 2000ms, agora 800ms
 
       return () => clearTimeout(timer)
+    } else {
+      // Liberar botão após todas as mensagens + tempo de leitura
+      setTimeout(() => {
+        setCanProceed(true)
+        if (onCanProceed) onCanProceed(true)
+      }, 8000) // 8 segundos para ler tudo
     }
-  }, [currentMessageIndex, startTyping])
+  }, [currentMessageIndex, startTyping, onCanProceed])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -451,27 +458,46 @@ const ChatGamingStep = () => {
         </div>
       )}
 
-      {/* Explicação educativa */}
+      {/* Explicação educativa com indicador de progresso */}
       {displayedMessages.length >= messages.length && (
-        <div 
-          className="bg-blue-900/30 border border-blue-500 rounded-lg p-4 text-center"
-          style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}
-        >
-          <p className="text-blue-200 text-sm font-semibold">
-            ✅ <strong>Você viu:</strong> Como predadores se aproximam de crianças em servidores públicos. 
-            Parecem amigos, ganham confiança e depois isolam a vítima.
-          </p>
+        <div style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
+          <div className="bg-blue-900/30 border border-blue-500 rounded-lg p-4 text-center mb-4">
+            <p className="text-blue-200 text-sm font-semibold">
+              ✅ <strong>Você viu:</strong> Como predadores se aproximam de crianças em servidores públicos. 
+              Parecem amigos, ganham confiança e depois isolam a vítima.
+            </p>
+          </div>
+          
+          {/* Indicador de tempo de leitura */}
+          {!canProceed && (
+            <div className="text-center">
+              <div className="bg-amber-900/30 border border-amber-500 rounded-lg p-3 inline-block">
+                <p className="text-amber-300 text-sm font-semibold">
+                  ⏳ Reserve um momento para absorver essas informações...
+                </p>
+                <div className="mt-2 w-48 bg-gray-700 rounded-full h-2 mx-auto">
+                  <div 
+                    className="bg-amber-500 h-2 rounded-full transition-all duration-1000"
+                    style={{ 
+                      animation: 'progress-fill 8s linear forwards'
+                    }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
   )
 }
 
-// Componente Chat Privado
-const ChatPrivateStep = () => {
+// Componente Chat Privado - TIMING OTIMIZADO
+const ChatPrivateStep = ({ onCanProceed }) => {
   const [displayedMessages, setDisplayedMessages] = useState([])
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
   const [showAlerts, setShowAlerts] = useState(false)
+  const [canProceed, setCanProceed] = useState(false)
   const { typingUsers, startTyping } = useRealisticTyping()
   const messagesEndRef = useRef(null)
 
@@ -491,15 +517,21 @@ const ChatPrivateStep = () => {
             setCurrentMessageIndex(prev => prev + 1)
             
             if (currentMessage.type === 'alert' && currentMessageIndex >= 1) {
-              setTimeout(() => setShowAlerts(true), 500)
+              setTimeout(() => setShowAlerts(true), 300)
             }
           }
         )
-      }, currentMessageIndex * 2500 + 1000)
+      }, currentMessageIndex * 1000 + 500) // ACELERADO: era 2500ms, agora 1000ms
 
       return () => clearTimeout(timer)
+    } else {
+      // Liberar botão após tempo de leitura
+      setTimeout(() => {
+        setCanProceed(true)
+        if (onCanProceed) onCanProceed(true)
+      }, 10000) // 10 segundos - mais conteúdo
     }
-  }, [currentMessageIndex, startTyping])
+  }, [currentMessageIndex, startTyping, onCanProceed])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -571,25 +603,41 @@ const ChatPrivateStep = () => {
 
       {/* Explicação educativa */}
       {displayedMessages.length >= messages.length && (
-        <div 
-          className="bg-orange-900/30 border border-orange-500 rounded-lg p-4 text-center"
-          style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}
-        >
-          <p className="text-orange-200 text-sm font-semibold">
-            ⚠️ <strong>A manipulação escala:</strong> Isolamento, exploração sexual, roubo de dados. 
-            A vítima não consegue sair porque já foi comprometida.
-          </p>
+        <div style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
+          <div className="bg-orange-900/30 border border-orange-500 rounded-lg p-4 text-center mb-4">
+            <p className="text-orange-200 text-sm font-semibold">
+              ⚠️ <strong>A manipulação escala:</strong> Isolamento, exploração sexual, roubo de dados. 
+              A vítima não consegue sair porque já foi comprometida.
+            </p>
+          </div>
+          
+          {!canProceed && (
+            <div className="text-center">
+              <div className="bg-red-900/30 border border-red-500 rounded-lg p-3 inline-block">
+                <p className="text-red-300 text-sm font-semibold">
+                  🚨 Analise os alertas críticos acima antes de continuar...
+                </p>
+                <div className="mt-2 w-48 bg-gray-700 rounded-full h-2 mx-auto">
+                  <div 
+                    className="bg-red-500 h-2 rounded-full"
+                    style={{ animation: 'progress-fill 10s linear forwards' }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
   )
 }
 
-// Componente Chat Direto
-const ChatDirectStep = () => {
+// Componente Chat Direto - TIMING OTIMIZADO
+const ChatDirectStep = ({ onCanProceed }) => {
   const [displayedMessages, setDisplayedMessages] = useState([])
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
   const [showAlerts, setShowAlerts] = useState(false)
+  const [canProceed, setCanProceed] = useState(false)
   const { typingUsers, startTyping } = useRealisticTyping()
   const messagesEndRef = useRef(null)
 
@@ -609,15 +657,21 @@ const ChatDirectStep = () => {
             setCurrentMessageIndex(prev => prev + 1)
             
             if (currentMessage.type === 'alert' && currentMessageIndex >= 1) {
-              setTimeout(() => setShowAlerts(true), 500)
+              setTimeout(() => setShowAlerts(true), 300)
             }
           }
         )
-      }, currentMessageIndex * 3000 + 1000)
+      }, currentMessageIndex * 1200 + 500) // ACELERADO: era 3000ms, agora 1200ms
 
       return () => clearTimeout(timer)
+    } else {
+      // Liberar botão após tempo de leitura
+      setTimeout(() => {
+        setCanProceed(true)
+        if (onCanProceed) onCanProceed(true)
+      }, 12000) // 12 segundos - conteúdo mais crítico
     }
-  }, [currentMessageIndex, startTyping])
+  }, [currentMessageIndex, startTyping, onCanProceed])
 
   useEffect(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
@@ -690,14 +744,29 @@ const ChatDirectStep = () => {
 
       {/* Explicação crítica */}
       {displayedMessages.length >= messages.length && (
-        <div 
-          className="bg-red-900/40 border border-red-600 rounded-lg p-4 text-center"
-          style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}
-        >
-          <p className="text-red-300 text-sm font-bold" style={{ animation: 'pulse-text 3s infinite' }}>
-            🚨 <strong>PONTO DE NÃO RETORNO:</strong> Ameaças, chantagem e extorsão. 
-            A criança não consegue sair sem sofrer consequências.
-          </p>
+        <div style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
+          <div className="bg-red-900/40 border border-red-600 rounded-lg p-4 text-center mb-4">
+            <p className="text-red-300 text-sm font-bold" style={{ animation: 'pulse-text 3s infinite' }}>
+              🚨 <strong>PONTO DE NÃO RETORNO:</strong> Ameaças, chantagem e extorsão. 
+              A criança não consegue sair sem sofrer consequências.
+            </p>
+          </div>
+          
+          {!canProceed && (
+            <div className="text-center">
+              <div className="bg-red-900/40 border border-red-600 rounded-lg p-3 inline-block">
+                <p className="text-red-300 text-sm font-bold">
+                  ⚠️ Situação EXTREMA - Absorva a gravidade desta etapa...
+                </p>
+                <div className="mt-2 w-48 bg-gray-700 rounded-full h-2 mx-auto">
+                  <div 
+                    className="bg-red-600 h-2 rounded-full"
+                    style={{ animation: 'progress-fill 12s linear forwards' }}
+                  />
+                </div>
+              </div>
+            </div>
+          )}
         </div>
       )}
     </div>
@@ -901,6 +970,7 @@ export default function QuizStep() {
   const router = useRouter()
   const step = Number.parseInt(params.step as string)
   const [isLoaded, setIsLoaded] = useState(false)
+  const [canProceed, setCanProceed] = useState(step === 4) // Etapa 4 pode avançar imediatamente
   const [sessionId] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.sessionStorage.getItem('quiz_session') || 'anonymous'
@@ -910,6 +980,11 @@ export default function QuizStep() {
 
   const currentStep = quizData.steps[step - 1]
   const progress = (step / 4) * 100
+
+  // Função para receber o estado dos componentes filhos
+  const handleCanProceed = useCallback((value) => {
+    setCanProceed(value)
+  }, [])
 
   useEffect(() => {
     const timer = setTimeout(() => setIsLoaded(true), 300)
@@ -1073,23 +1148,35 @@ export default function QuizStep() {
                 </div>
               )}
 
-              {/* Renderizar componentes específicos */}
-              {step === 1 && <ChatGamingStep />}
-              {step === 2 && <ChatPrivateStep />}
-              {step === 3 && <ChatDirectStep />}
+              {/* Renderizar componentes específicos com callback */}
+              {step === 1 && <ChatGamingStep onCanProceed={handleCanProceed} />}
+              {step === 2 && <ChatPrivateStep onCanProceed={handleCanProceed} />}
+              {step === 3 && <ChatDirectStep onCanProceed={handleCanProceed} />}
               {step === 4 && <EducationalStep />}
 
-              {/* CTA Button */}
+              {/* CTA Button com controle */}
               <div className="mt-8 text-center">
                 <button
                   onClick={handleNext}
-                  className="cta-button bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white font-bold py-4 px-8 rounded-full shadow-lg w-full sm:w-auto text-base relative overflow-hidden transition-all duration-300 hover:scale-105"
+                  disabled={!canProceed}
+                  className={`cta-button font-bold py-4 px-8 rounded-full shadow-lg w-full sm:w-auto text-base relative overflow-hidden transition-all duration-300 ${
+                    canProceed 
+                      ? 'bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white hover:scale-105 cursor-pointer' 
+                      : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-70'
+                  }`}
                 >
                   <span className="relative z-10 flex items-center justify-center gap-2">
                     {step === 4 ? "VER SOLUÇÃO COMPLETA" : "PRÓXIMA ETAPA"}
                     <ArrowRight className="w-5 h-5" />
                   </span>
                 </button>
+                
+                {/* Indicador quando botão está desabilitado */}
+                {!canProceed && step <= 3 && (
+                  <p className="text-gray-400 text-xs mt-2">
+                    ⏳ Aguarde a simulação terminar para continuar
+                  </p>
+                )}
               </div>
 
               {/* Aviso de conteúdo */}
@@ -1201,6 +1288,11 @@ export default function QuizStep() {
           50% { color: #ef4444; }
         }
 
+        @keyframes progress-fill {
+          from { width: 0%; }
+          to { width: 100%; }
+        }
+
         .loading-spinner {
           animation: spin 2s linear infinite;
         }
@@ -1227,6 +1319,15 @@ export default function QuizStep() {
           height: 100%;
           background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
           animation: shimmer 0.6s;
+        }
+
+        .cta-button:disabled {
+          transform: none !important;
+        }
+
+        .cta-button:disabled:hover {
+          transform: none !important;
+          scale: 1 !important;
         }
 
         @keyframes shimmer {
