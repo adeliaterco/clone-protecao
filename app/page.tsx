@@ -7,17 +7,17 @@ import Image from "next/image"
 
 // GA otimizado - só envia quando necessário
 const enviarEvento = (() => {
-  let queue = []
-  let timeout
+  let queue: any[] = []
+  let timeout: NodeJS.Timeout | null = null
 
-  return (evento, props = {}) => {
+  return (evento: string, props: any = {}) => {
     queue.push({ evento, props })
-    clearTimeout(timeout)
+    if (timeout) clearTimeout(timeout)
 
     timeout = setTimeout(() => {
-      if (typeof window !== "undefined" && window.gtag && queue.length) {
+      if (typeof window !== "undefined" && (window as any).gtag && queue.length) {
         queue.forEach(({ evento, props }) => {
-          window.gtag("event", evento, props)
+          (window as any).gtag("event", evento, props)
         })
         queue = []
       }
@@ -31,6 +31,14 @@ export default function HomePage() {
   const [loadingProgress, setLoadingProgress] = useState(0)
   const [errorMessage, setErrorMessage] = useState("")
   const [isOnline, setIsOnline] = useState(true)
+  const [randomSpot, setRandomSpot] = useState(18) // Estado para número aleatório
+  const [mounted, setMounted] = useState(false)
+
+  // Garante que o componente foi montado no cliente
+  useEffect(() => {
+    setMounted(true)
+    setRandomSpot(Math.floor(Math.random() * 23 + 77))
+  }, [])
 
   // Detecção de conexão minimalista
   useEffect(() => {
@@ -49,17 +57,17 @@ export default function HomePage() {
 
   // Tracking minimalista - só o essencial
   useEffect(() => {
-    if (typeof window === "undefined") return
+    if (typeof window === "undefined" || !mounted) return
 
     const timer = setTimeout(() => {
       enviarEvento("page_view", {
         device: window.innerWidth < 768 ? "mobile" : "desktop",
-        headline_version: "dark_internet_simulation" // ADAPTADO PARA A NOVA OFERTA
+        headline_version: "dark_internet_simulation"
       })
     }, 1000)
 
     return () => clearTimeout(timer)
-  }, [])
+  }, [mounted])
 
   // Função de início ultra-otimizada
   const handleStart = useCallback(() => {
@@ -69,7 +77,7 @@ export default function HomePage() {
     setLoadingProgress(20)
 
     enviarEvento("quiz_start", {
-      headline_version: "dark_internet_simulation" // ADAPTADO PARA A NOVA OFERTA
+      headline_version: "dark_internet_simulation"
     })
 
     let progress = 20
@@ -98,12 +106,17 @@ export default function HomePage() {
     }, 200)
   }, [isLoading, isOnline, router])
 
+  // Não renderizar até que esteja montado (evita hidratação)
+  if (!mounted) {
+    return (
+      <div style={{ backgroundColor: "#000000", minHeight: "100vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+        <div style={{ color: "white" }}>Carregando...</div>
+      </div>
+    )
+  }
+
   return (
     <>
-      <head>
-        <link rel="preconnect" href="https://comprarplanseguro.shop" />
-        <link rel="dns-prefetch" href="https://comprarplanseguro.shop" />
-      </head>
       <div
         style={{
           backgroundColor: "#000000",
@@ -249,15 +262,6 @@ export default function HomePage() {
             padding-top: 20px;
           }
 
-          .copyright {
-            position: relative;
-            margin-top: 40px;
-            padding: 20px;
-            color: #888;
-            font-size: 12px;
-            text-align: center;
-          }
-
           .loading-overlay {
             position: fixed;
             top: 0;
@@ -293,7 +297,6 @@ export default function HomePage() {
             border-radius: 3px;
           }
 
-          /* NOVOS ESTILOS PARA A OFERTA "O LADO ESCURO DA INTERNET" */
           .simulation-badge {
             background: linear-gradient(135deg, #dc2626 0%, #f87171 100%);
             color: white;
@@ -302,7 +305,7 @@ export default function HomePage() {
             padding: 6px 12px;
             border-radius: 20px;
             display: inline-block;
-            margin-top: -10px; /* Ajuste para posicionar mais perto do título */
+            margin-top: -10px;
             margin-bottom: 20px;
             text-transform: uppercase;
             letter-spacing: 0.5px;
@@ -338,7 +341,7 @@ export default function HomePage() {
             align-items: flex-start;
           }
           .what-happens-list li::before {
-            content: '→'; /* Usando a seta como conteúdo */
+            content: '→';
             color: #dc2626;
             margin-right: 8px;
             font-weight: bold;
@@ -347,8 +350,8 @@ export default function HomePage() {
           }
 
           .warning-section {
-            background: rgba(255, 193, 7, 0.1); /* Amber background */
-            border: 1px solid rgba(255, 193, 7, 0.4); /* Amber border */
+            background: rgba(255, 193, 7, 0.1);
+            border: 1px solid rgba(255, 193, 7, 0.4);
             border-radius: 10px;
             padding: 20px;
             margin-top: 25px;
@@ -356,7 +359,7 @@ export default function HomePage() {
             text-align: left;
           }
           .warning-title {
-            color: #ffc107; /* Amber color */
+            color: #ffc107;
             font-size: 18px;
             font-weight: 700;
             margin-bottom: 15px;
@@ -376,10 +379,9 @@ export default function HomePage() {
             align-items: flex-start;
           }
           .warning-list li::before {
-            content: ''; /* Remove default bullet */
+            content: '';
             margin-right: 0;
           }
-
 
           @media (max-width: 768px) {
             .container-quiz {
@@ -408,11 +410,6 @@ export default function HomePage() {
               font-size: 14px;
               padding: 16px 28px;
               max-width: 100%;
-            }
-
-            .copyright {
-              margin-top: 30px;
-              padding: 15px;
             }
 
             .what-happens-title, .warning-title {
@@ -453,9 +450,9 @@ export default function HomePage() {
           <div className="loading-overlay">
             <div className="loading-content">
               <div style={{ fontSize: "18px", fontWeight: "600" }}>
-                Preparando sua imersão... {/* ADAPTADO PARA A NOVA OFERTA */}
+                Preparando sua imersão...
                 <div style={{fontSize: "14px", marginTop: "8px", color: "#dc2626"}}>
-                  ⚠️ Spot #{Math.floor(Math.random() * 23 + 77)} de 100 reservado
+                  ⚠️ Spot #{randomSpot} de 100 reservado
                 </div>
               </div>
               <div className="progress-bar">
@@ -518,27 +515,28 @@ export default function HomePage() {
           </div>
         )}
 
-        {/* CONTEÚDO PRINCIPAL COM NOVA COPY */}
+        {/* CONTEÚDO PRINCIPAL */}
         <div className="main-content">
           <div className="container-quiz">
             
-            {/* LOGO CENTRALIZADA */}
+            {/* LOGO */}
             <div className="logo-container">
               <Image
-                src="https://comprarplanseguro.shop/wp-content/uploads/2025/10/c2b0ddda-8a7c-4554-a6c9-d57887b06149.webp" // Mantida como placeholder
-                alt="Logo O Lado Escuro da Internet" // ADAPTADO
+                src="https://comprarplanseguro.shop/wp-content/uploads/2025/10/c2b0ddda-8a7c-4554-a6c9-d57887b06149.webp"
+                alt="Logo O Lado Escuro da Internet"
                 width={120}
                 height={75}
                 className="logo-pequena"
                 priority
                 quality={70}
                 onError={(e) => {
-                  e.target.style.display = "none"
+                  const target = e.target as HTMLImageElement;
+                  target.style.display = "none";
                 }}
               />
             </div>
 
-            {/* HEADLINE ADAPTADA */}
+            {/* HEADLINE */}
             <h1 className="titulo-quiz">
               <span className="emoji-alerta">🚨</span>
               VOCÊ NÃO SABE O QUE SEU FILHO VÊ
@@ -548,15 +546,15 @@ export default function HomePage() {
               </span>
             </h1>
 
-            {/* BADGE "SIMULAÇÃO REALISTA" */}
+            {/* BADGE */}
             <div className="simulation-badge">SIMULAÇÃO REALISTA</div>
 
-            {/* SUBTÍTULO ADAPTADO */}
+            {/* SUBTÍTULO */}
             <p className="subtitulo-quiz">
               Descubra em uma simulação realista, inspirada em casos reais, o que seus filhos enfrentam online.
             </p>
 
-            {/* SEÇÃO "O QUE VAI ACONTECER?" */}
+            {/* O QUE VAI ACONTECER */}
             <div className="what-happens-section">
               <h3 className="what-happens-title">O que vai acontecer?</h3>
               <ul className="what-happens-list">
@@ -567,19 +565,19 @@ export default function HomePage() {
               </ul>
             </div>
 
-            {/* PROVA SOCIAL ADAPTADA */}
+            {/* PROVA SOCIAL */}
             <p className="prova-social">
-              2.847 pais já viram a simulação completa. {/* ADAPTADO */}
+              2.847 pais já viram a simulação completa.
             </p>
 
-            {/* INFORMAÇÕES DO QUIZ ADAPTADAS */}
+            {/* INFO DO QUIZ */}
             <div className="quiz-info">
-              <div>⏱️ 5 min de imersão</div> {/* ADAPTADO */}
-              <div>🎯 Consciência imediata</div> {/* ADAPTADO */}
-              <div>🔥 Impacto garantido</div> {/* ADAPTADO */}
+              <div>⏱️ 5 min de imersão</div>
+              <div>🎯 Consciência imediata</div>
+              <div>🔥 Impacto garantido</div>
             </div>
 
-            {/* SEÇÃO "AVISOS E CONDIÇÕES" */}
+            {/* AVISOS */}
             <div className="warning-section">
               <h3 className="warning-title">AVISOS E CONDIÇÕES:</h3>
               <ul className="warning-list">
@@ -588,7 +586,7 @@ export default function HomePage() {
               </ul>
             </div>
 
-            {/* Escassez Real ADAPTADA */}
+            {/* ESCASSEZ */}
             <div style={{
               background: 'rgba(220, 38, 38, 0.1)',
               border: '1px solid rgba(220, 38, 38, 0.4)',
@@ -598,17 +596,17 @@ export default function HomePage() {
               textAlign: 'center'
             }}>
               <div style={{color: '#dc2626', fontSize: '13px', fontWeight: '600'}}>
-                ⚠️ ACESSO LIMITADO HOJE {/* ADAPTADO */}
+                ⚠️ ACESSO LIMITADO HOJE
               </div>
               <div style={{color: '#fff', fontSize: '12px', marginTop: '4px'}}>
-                Apenas 100 pais por dia podem acessar a simulação completa {/* ADAPTADO */}
+                Apenas 100 pais por dia podem acessar a simulação completa
               </div>
               <div style={{color: '#dc2626', fontSize: '12px', fontWeight: '600', marginTop: '2px'}}>
-                Spots restantes: 18 {/* ADAPTADO */}
+                Spots restantes: 18
               </div>
             </div>
 
-            {/* CTA OTIMIZADO ADAPTADO */}
+            {/* CTA */}
             <button 
               onClick={handleStart} 
               disabled={isLoading || !isOnline} 
@@ -618,13 +616,13 @@ export default function HomePage() {
                 "PREPARANDO..."
               ) : (
                 <>
-                  INICIAR IMERSÃO {/* ADAPTADO */}
+                  INICIAR IMERSÃO
                   <ArrowRight size={18} />
                 </>
               )}
             </button>
 
-            {/* GARANTIA MÍNIMA */}
+            {/* GARANTIA */}
             <div className="garantia-simples">
               <Shield size={14} />
               Completamente confidencial
