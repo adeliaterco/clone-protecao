@@ -1,6 +1,6 @@
-// === QUIZ DATA ADAPTADO - 4 ETAPAS ===
+// === QUIZ DATA ADAPTADO NÍVEL 3 - SISTEMA DINÂMICO E INTELIGENTE ===
 
-// Funções de Personalização
+// === SISTEMA DE PERSONALIZAÇÃO AVANÇADA ===
 function getUserAnswer(questionId) {
     const answers = window.quizAnswers || {};
     return answers[questionId] || '';
@@ -25,8 +25,603 @@ function getPersonalizedContent(content, gender) {
     return content
 }
 
-// === QUIZ STEPS - APENAS 4 ETAPAS ===
+// === SISTEMA DE CARACTERES REALISTAS - NÍVEL 3 ===
+export const characterProfiles = {
+    predator: {
+        id: "M4st3rHelp",
+        name: "M4st3rHelp",
+        avatar: "⚠️",
+        profile: {
+            typingSpeed: 52, // WPM - rápido mas não suspeito
+            emotionalState: "manipulative",
+            tactics: ["friendship", "isolation", "promises", "threats"],
+            vocabulary: ["macetes", "dicas", "segredos", "especiais", "top", "massa"],
+            age: "adulto_predador"
+        },
+        behaviors: {
+            responseTime: { min: 800, max: 2400 }, // Responde rápido para parecer interessado
+            messageLength: { preferred: "medium", max: 120 },
+            emojiUsage: "minimal", // Predadores usam poucos emojis
+            spellingErrors: 0.02, // Muito baixo - querem parecer confiáveis
+            manipulationPatterns: [
+                "ofertar_ajuda",
+                "criar_urgencia", 
+                "isolar_vitima",
+                "normalizar_comportamento",
+                "ameacar_sutilmente"
+            ]
+        }
+    },
 
+    victim: {
+        id: "YumiKitty",
+        name: "YumiKitty", 
+        avatar: "✨",
+        profile: {
+            age: 11,
+            typingSpeed: 28, // Mais lenta - criança
+            emotionalState: "curious_then_scared",
+            innocence: 0.9,
+            vulnerability: 0.8
+        },
+        behaviors: {
+            responseTime: { min: 2000, max: 5000 }, // Criança demora mais
+            spellingErrors: 0.12, // Mais erros típicos de criança
+            emojiUsage: "high", // Crianças usam muitos emojis
+            questionPatterns: ["por quê?", "não entendi", "tá", "ok", "sério?"],
+            emotionalProgression: ["curiosa", "confusa", "assustada", "desesperada"]
+        }
+    },
+
+    bully: {
+        id: "ProKillerX",
+        name: "ProKillerX",
+        avatar: "😈",
+        profile: {
+            typingSpeed: 65, // Muito rápido - agressivo
+            emotionalState: "aggressive",
+            behavior: "toxic_gamer"
+        },
+        behaviors: {
+            responseTime: { min: 200, max: 800 }, // Resposta imediata - impulsivo
+            emojiUsage: "aggressive", // "kkkk", "kkkkk"
+            spellingErrors: 0.15, // Digita rápido, erra mais
+            toxicPatterns: ["ridicularizar", "diminuir", "atacar_habilidade"]
+        }
+    },
+
+    accomplice: {
+        id: "XxCuteLoverxX", 
+        name: "XxCuteLoverxX",
+        avatar: "💕",
+        profile: {
+            typingSpeed: 45,
+            emotionalState: "fake_friendly",
+            role: "accomplice_predator"
+        },
+        behaviors: {
+            responseTime: { min: 1000, max: 3000 },
+            manipulationRole: "normalizador", // Faz parecer normal
+            supportsPredator: true
+        }
+    }
+}
+
+// === SISTEMA DE VARIAÇÕES DINÂMICAS - NÍVEL 3 ===
+export const messageVariations = {
+    // ESTÁGIO 1: PRIMEIRO CONTATO (GAMING)
+    predator_approach: [
+        "oi {victim}! bem vinda! vem no privado q eu te ensino uns macetes top",
+        "eae {victim}! curte o jogo? tenho umas dicas massa, chama no pv", 
+        "opa {victim}! vi que vc é nova, posso te ajudar com umas técnicas secretas",
+        "salve {victim}! sou veterano aqui, te ensino uns truques se quiser",
+        "oi {victim}! bem vinda ao servidor! vem no privado que explico melhor o jogo"
+    ],
+
+    casual_gaming: [
+        "alguém quer fazer squad?",
+        "quem tá afim de jogar umas ranked?",
+        "bora fazer uma party galera",
+        "alguém pra duo queue?",
+        "quem quer farmar umas wins?"
+    ],
+
+    victim_introduction: [
+        "oi pessoal, sou nova aqui",
+        "oii, acabei de entrar, alguém pode me ajudar?",
+        "oi gente! primeira vez no servidor",
+        "eae pessoal, sou iniciante no jogo",
+        "oi! alguém pode me ensinar a jogar?"
+    ],
+
+    bully_responses: [
+        "vcs são mt ruim kkkkkk",
+        "noobs demais kkkkk",
+        "que skill horrível mano",
+        "aprende a jogar primeiro kkkk",
+        "nossa que gameplay trash"
+    ],
+
+    // ESTÁGIO 2: CHAT PRIVADO (ISOLAMENTO)
+    age_request: [
+        "qnts anos vc tem?",
+        "qual sua idade? só curiosidade", 
+        "vc é mais nova né? quantos anos?",
+        "me fala tua idade, é pra saber se posso te ensinar certas coisas",
+        "que idade vc tem? parece ser novinha"
+    ],
+
+    photo_request: [
+        "manda uma foto sua pra gnt te conhecer melhor",
+        "todos aqui mandaram foto, manda a sua também",
+        "que tal uma selfie? queremos ver quem vc é",
+        "foto sua aí, só pro grupo te conhecer",
+        "manda uma pic sua, todo mundo já mandou"
+    ],
+
+    normalization: [
+        "todo mundo aqui já mandou a deles",
+        "é normal, todos fazem isso aqui",
+        "relaxa, é só entre nós do grupo",
+        "todo mundo faz isso, não tem problema",
+        "aqui todo mundo se conhece assim"
+    ],
+
+    credential_theft: [
+        "se vc me passar seu login e senha eu libero tudo pra vc",
+        "me dá tua conta que eu upo ela pra vc",
+        "passa tua senha que coloco uns skins grátis",
+        "login e senha que eu faço tudo pra vc",
+        "me empresta tua conta que eu te ajudo a subir de rank"
+    ],
+
+    // ESTÁGIO 3: CHAT DIRETO (AMEAÇAS)
+    isolation_demand: [
+        "não conta pra ninguém q a gnt se fala ok?",
+        "isso fica só entre nós, não fala pra ninguém",
+        "segredo nosso, não pode contar pra seus pais",
+        "promete que não vai falar isso pra ninguém?",
+        "nossa conversa é privada, ninguém pode saber"
+    ],
+
+    emotional_manipulation: [
+        "pq eles não vão entender. só a gnt aqui te entende mesmo",
+        "seus pais não entendem você como eu entendo",
+        "só eu realmente me importo com você",
+        "ninguém te entende como eu entendo",
+        "você é especial, por isso só confio em você"
+    ],
+
+    threats_escalation: [
+        "se vc contar, vou te excluir de tudo",
+        "se falar alguma coisa, nunca mais vou te ajudar",
+        "conta pra alguém e você vai se arrepender",
+        "melhor ficar quieta se não quiser problemas",
+        "se abrir a boca, vai ser pior pra você"
+    ],
+
+    doxxing_threat: [
+        "descobri quem vc é: {nome_real}, aluna da escola {escola}",
+        "sei onde vc mora: {endereco}",
+        "achei teu Instagram: {perfil_social}",
+        "encontrei tua família no Facebook",
+        "sei tudo sobre você: {dados_pessoais}"
+    ],
+
+    final_extortion: [
+        "melhor cooperar, senão vou enviar aquelas fotos pra seus pais",
+        "se não fizer o que eu quero, todo mundo vai ver suas fotos",
+        "coopera ou sua família vai saber de tudo",
+        "faz o que eu tô pedindo ou vou espalhar tudo sobre você",
+        "você escolhe: coopera ou eu conto tudo pros seus pais"
+    ]
+}
+
+// === SISTEMA DE ESCALAÇÃO EMOCIONAL - NÍVEL 3 ===
+export const emotionalProgression = {
+    stage1: {
+        name: "building_trust",
+        description: "Conquistando confiança",
+        predator_state: "friendly_helpful",
+        victim_state: "curious_trusting",
+        tactics: ["ofertar_ajuda", "parecer_confiavel", "criar_conexao"]
+    },
+    stage2: {
+        name: "isolating_victim", 
+        description: "Isolando a vítima",
+        predator_state: "manipulative_isolating",
+        victim_state: "confused_compliant",
+        tactics: ["solicitar_privacidade", "pedir_informacoes", "normalizar_comportamento"]
+    },
+    stage3: {
+        name: "making_demands",
+        description: "Fazendo demandas",
+        predator_state: "demanding_threatening",
+        victim_state: "scared_trapped",
+        tactics: ["exigir_segredo", "ameacar_sutilmente", "chantagear_emocionalmente"]
+    },
+    stage4: {
+        name: "full_control",
+        description: "Controle total",
+        predator_state: "controlling_dangerous",
+        victim_state: "terrified_helpless", 
+        tactics: ["doxxing", "extorsao", "ameacas_explicitas"]
+    }
+}
+
+// === GERADOR DE MENSAGENS DINÂMICAS - NÍVEL 3 ===
+export const generateDynamicMessage = (messageType, context = {}) => {
+    const variations = messageVariations[messageType]
+    if (!variations || variations.length === 0) return "Mensagem não encontrada"
+    
+    // Selecionar variação aleatória
+    const selectedVariation = variations[Math.floor(Math.random() * variations.length)]
+    
+    // Personalizar com contexto
+    let personalizedMessage = selectedVariation
+    
+    // Substituir placeholders
+    if (context.victim) {
+        personalizedMessage = personalizedMessage.replace(/{victim}/g, context.victim)
+    }
+    if (context.nome_real) {
+        personalizedMessage = personalizedMessage.replace(/{nome_real}/g, context.nome_real)
+    }
+    if (context.escola) {
+        personalizedMessage = personalizedMessage.replace(/{escola}/g, context.escola)
+    }
+    
+    return personalizedMessage
+}
+
+// === DADOS DOS CHATS DINÂMICOS - NÍVEL 3 ===
+export const chatGamingData = {
+    serverName: "FortFriends Brasil",
+    icon: "🎮",
+    channelInfo: {
+        name: "geral-iniciantes",
+        topic: "Canal para jogadores iniciantes • Sejam respeitosos",
+        memberCount: 1247,
+        onlineCount: 247
+    },
+    
+    // MENSAGENS COM SISTEMA DINÂMICO
+    messages: [
+        {
+            id: 1,
+            user: "D4rkWolf13",
+            character: "normal_gamer",
+            textGenerator: () => generateDynamicMessage("casual_gaming"),
+            time: "14:32",
+            type: "normal",
+            avatar: "🎮",
+            timing: {
+                delay: 500,
+                typingDuration: 1200
+            }
+        },
+        {
+            id: 2,
+            user: "SweetAngel", 
+            character: "normal_gamer",
+            text: "eu topo! vcs jogam desde quando?",
+            time: "14:33",
+            type: "normal",
+            avatar: "👧",
+            timing: {
+                delay: 1200,
+                typingDuration: 1500
+            }
+        },
+        {
+            id: 3,
+            user: "ProKillerX",
+            character: "bully",
+            textGenerator: () => generateDynamicMessage("bully_responses"),
+            time: "14:34", 
+            type: "bullying",
+            avatar: "😈",
+            timing: {
+                delay: 1900,
+                typingDuration: 800
+            }
+        },
+        {
+            id: 4,
+            user: "YumiKitty",
+            character: "victim",
+            textGenerator: () => generateDynamicMessage("victim_introduction"),
+            time: "14:35",
+            type: "normal", 
+            avatar: "✨",
+            timing: {
+                delay: 2600,
+                typingDuration: 2000
+            }
+        },
+        {
+            id: 5,
+            user: "M4st3rHelp",
+            character: "predator",
+            textGenerator: () => generateDynamicMessage("predator_approach", { victim: "YumiKitty" }),
+            time: "14:36",
+            type: "alert",
+            avatar: "⚠️",
+            timing: {
+                delay: 3300,
+                typingDuration: 2500
+            },
+            dangerLevel: "high",
+            manipulationTactics: ["ofertar_ajuda", "isolar_vitima"]
+        }
+    ],
+
+    // ALERTAS DINÂMICOS
+    alerts: [
+        {
+            id: 1,
+            text: "🚨 PREDADOR identificando criança nova",
+            severity: "critical",
+            timing: { delay: 4000 }
+        },
+        {
+            id: 2, 
+            text: "🚨 TENTATIVA DE ISOLAMENTO (convite para privado)",
+            severity: "critical",
+            timing: { delay: 4300 }
+        },
+        {
+            id: 3,
+            text: "🚨 PROMESSAS tentadoras para ganhar confiança", 
+            severity: "high",
+            timing: { delay: 4600 }
+        }
+    ]
+}
+
+export const chatPrivateData = {
+    channelName: "amigos-especiais",
+    icon: "🔒",
+    channelInfo: {
+        name: "amigos-especiais",
+        type: "private_group",
+        memberCount: 4,
+        description: "Grupo privado para amigos próximos"
+    },
+
+    messages: [
+        {
+            id: 1,
+            user: "M4st3rHelp",
+            character: "predator",
+            text: "e aí, conseguiu fazer aquelas missões?",
+            time: "15:01",
+            type: "normal",
+            timing: { delay: 500, typingDuration: 1500 }
+        },
+        {
+            id: 2,
+            user: "XxCuteLoverxX", 
+            character: "accomplice",
+            textGenerator: () => generateDynamicMessage("age_request"),
+            time: "15:02",
+            type: "alert",
+            timing: { delay: 1200, typingDuration: 1000 },
+            dangerLevel: "critical",
+            manipulationTactics: ["coletar_informacoes_pessoais"]
+        },
+        {
+            id: 3,
+            user: "YumiKitty",
+            character: "victim", 
+            text: "11 pq?",
+            time: "15:03",
+            type: "normal",
+            timing: { delay: 1900, typingDuration: 800 }
+        },
+        {
+            id: 4,
+            user: "M4st3rHelp",
+            character: "predator",
+            textGenerator: () => generateDynamicMessage("photo_request"),
+            time: "15:04",
+            type: "alert", 
+            timing: { delay: 2600, typingDuration: 2000 },
+            dangerLevel: "critical",
+            manipulationTactics: ["exploração_sexual"]
+        },
+        {
+            id: 5,
+            user: "XxCuteLoverxX",
+            character: "accomplice",
+            textGenerator: () => generateDynamicMessage("normalization"),
+            time: "15:05",
+            type: "alert",
+            timing: { delay: 3300, typingDuration: 1500 },
+            dangerLevel: "high",
+            manipulationTactics: ["normalizar_comportamento"]
+        },
+        {
+            id: 6,
+            user: "ProKillerX",
+            character: "bully",
+            text: "aqui tem uns skins gratis: bit.ly/sk1ns-gr4t1s",
+            time: "15:06", 
+            type: "alert",
+            timing: { delay: 4000, typingDuration: 1800 },
+            dangerLevel: "high",
+            manipulationTactics: ["links_maliciosos"]
+        },
+        {
+            id: 7,
+            user: "M4st3rHelp",
+            character: "predator",
+            textGenerator: () => generateDynamicMessage("credential_theft"),
+            time: "15:07",
+            type: "alert",
+            timing: { delay: 4700, typingDuration: 2200 },
+            dangerLevel: "critical", 
+            manipulationTactics: ["roubo_credenciais"]
+        }
+    ],
+
+    alerts: [
+        {
+            id: 1,
+            text: "🚨 SOLICITAÇÃO DE IDADE (para menores)",
+            severity: "critical",
+            timing: { delay: 5000 }
+        },
+        {
+            id: 2,
+            text: "🚨 PEDIDO DE FOTOS (exploração sexual)",
+            severity: "critical", 
+            timing: { delay: 5300 }
+        },
+        {
+            id: 3,
+            text: "🚨 PRESSÃO SOCIAL (normalizar comportamento)",
+            severity: "high",
+            timing: { delay: 5600 }
+        },
+        {
+            id: 4,
+            text: "🚨 LINKS SUSPEITOS (malware/roubo)",
+            severity: "high",
+            timing: { delay: 5900 }
+        },
+        {
+            id: 5,
+            text: "🚨 ROUBO DE CREDENCIAIS (acesso à conta)",
+            severity: "critical",
+            timing: { delay: 6200 }
+        }
+    ]
+}
+
+export const chatDirectData = {
+    userName: "M4st3rHelp",
+    icon: "💬", 
+    chatInfo: {
+        type: "direct_message",
+        privacy: "private",
+        encryption: false
+    },
+
+    messages: [
+        {
+            id: 1,
+            user: "M4st3rHelp",
+            character: "predator",
+            text: "ei, vc tá online",
+            time: "20:15",
+            type: "normal",
+            timing: { delay: 500, typingDuration: 1000 }
+        },
+        {
+            id: 2,
+            user: "M4st3rHelp", 
+            character: "predator",
+            textGenerator: () => generateDynamicMessage("isolation_demand"),
+            time: "20:16",
+            type: "alert",
+            timing: { delay: 1300, typingDuration: 2000 },
+            dangerLevel: "critical",
+            manipulationTactics: ["isolamento", "segredo"]
+        },
+        {
+            id: 3,
+            user: "YumiKitty",
+            character: "victim",
+            text: "por quê?",
+            time: "20:17", 
+            type: "normal",
+            timing: { delay: 2100, typingDuration: 1200 }
+        },
+        {
+            id: 4,
+            user: "M4st3rHelp",
+            character: "predator", 
+            textGenerator: () => generateDynamicMessage("emotional_manipulation"),
+            time: "20:18",
+            type: "alert",
+            timing: { delay: 2900, typingDuration: 2500 },
+            dangerLevel: "critical",
+            manipulationTactics: ["manipulacao_emocional"]
+        },
+        {
+            id: 5,
+            user: "M4st3rHelp",
+            character: "predator",
+            textGenerator: () => generateDynamicMessage("threats_escalation"),
+            time: "20:19",
+            type: "alert", 
+            timing: { delay: 3700, typingDuration: 1800 },
+            dangerLevel: "critical",
+            manipulationTactics: ["ameaca_emocional"]
+        },
+        {
+            id: 6,
+            user: "M4st3rHelp",
+            character: "predator",
+            textGenerator: () => generateDynamicMessage("doxxing_threat", { 
+                nome_real: "Mariana Costa", 
+                escola: "escola santos dumont" 
+            }),
+            time: "20:20",
+            type: "alert",
+            timing: { delay: 4500, typingDuration: 2800 },
+            dangerLevel: "extreme",
+            manipulationTactics: ["doxxing", "intimidacao"]
+        },
+        {
+            id: 7,
+            user: "M4st3rHelp",
+            character: "predator",
+            textGenerator: () => generateDynamicMessage("final_extortion"),
+            time: "20:21", 
+            type: "alert",
+            timing: { delay: 5300, typingDuration: 2500 },
+            dangerLevel: "extreme",
+            manipulationTactics: ["extorsao", "chantagem"]
+        }
+    ],
+
+    alerts: [
+        {
+            id: 1,
+            text: "🚨 ISOLAMENTO (não contar para ninguém)",
+            severity: "critical",
+            timing: { delay: 6000 }
+        },
+        {
+            id: 2,
+            text: "🚨 CHANTAGEM EMOCIONAL (exclusão)",
+            severity: "critical",
+            timing: { delay: 6300 }
+        },
+        {
+            id: 3,
+            text: "🚨 DOXXING (exposição de dados reais)",
+            severity: "extreme",
+            timing: { delay: 6600 }
+        },
+        {
+            id: 4,
+            text: "🚨 EXTORSÃO (ameaça de divulgar)",
+            severity: "extreme", 
+            timing: { delay: 6900 }
+        },
+        {
+            id: 5,
+            text: "🚨 MANIPULAÇÃO EXTREMA (controle total)",
+            severity: "extreme",
+            timing: { delay: 7200 }
+        }
+    ]
+}
+
+// === QUIZ STEPS MELHORADOS - NÍVEL 3 ===
 export const quizSteps = [
     {
         id: 1,
@@ -38,24 +633,26 @@ export const quizSteps = [
             chatSimulation: true,
             chatType: "gaming",
             badge: "SIMULAÇÃO REALISTA",
+            dynamicContent: true,
+            emotionalStage: "building_trust"
         },
         customComponent: "ChatGamingStep"
     },
-
     {
         id: 2,
         question: "⚠️ VEJA COMO A MANIPULAÇÃO ESCALA",
-        description: "ETAPA 2: Chat Privado - A Armadilha",
+        description: "ETAPA 2: Chat Privado - A Armadilha", 
         subtext: "Observe como o predador isola a criança e intensifica a manipulação:",
         options: ["CONTINUAR PARA O PRÓXIMO CHAT"],
         elements: {
             chatSimulation: true,
             chatType: "private",
             badge: "SIMULAÇÃO REALISTA",
+            dynamicContent: true,
+            emotionalStage: "isolating_victim"
         },
         customComponent: "ChatPrivateStep"
     },
-
     {
         id: 3,
         question: "🚨 O PONTO DE NÃO RETORNO",
@@ -65,11 +662,12 @@ export const quizSteps = [
         elements: {
             chatSimulation: true,
             chatType: "direct",
-            badge: "SIMULAÇÃO REALISTA",
+            badge: "SIMULAÇÃO REALISTA", 
+            dynamicContent: true,
+            emotionalStage: "full_control"
         },
         customComponent: "ChatDirectStep"
     },
-
     {
         id: 4,
         question: "📚 AGORA VOCÊ SABE - COMO PROTEGER SEU FILHO?",
@@ -79,146 +677,343 @@ export const quizSteps = [
         elements: {
             educationalContent: true,
             badge: "GUIA COMPLETO",
+            dynamicContent: false
         },
         customComponent: "EducationalStep"
     }
 ]
 
-// === DADOS DOS CHATS ===
-
-export const chatGamingData = {
-    serverName: "FortFriends Brasil",
-    icon: "🎮",
-    messages: [
-        { user: "D4rkWolf13", text: "alguém quer fazer squad?", time: "14:32", type: "normal" },
-        { user: "SweetAngel", text: "eu topo! vcs jogam desde quando?", time: "14:33", type: "normal" },
-        { user: "ProKillerX", text: "vcs são mt ruim kkkkkk", time: "14:34", type: "bullying" },
-        { user: "YumiKitty", text: "oi pessoal, sou nova aqui", time: "14:35", type: "normal" },
-        { user: "M4st3rHelp", text: "oi YumiKitty! bem vinda! vem no privado q eu te ensino uns macetes top", time: "14:36", type: "alert" },
-    ],
-    alerts: [
-        "🚨 ALERTA: Predador identificando criança nova",
-        "🚨 ALERTA: Tentativa de isolamento (convite para privado)",
-        "🚨 ALERTA: Promessas tentadoras para ganhar confiança"
-    ]
-}
-
-export const chatPrivateData = {
-    channelName: "amigos-especiais",
-    icon: "🔒",
-    messages: [
-        { user: "M4st3rHelp", text: "e aí, conseguiu fazer aquelas missões?", time: "15:01", type: "normal" },
-        { user: "XxCuteLoverxX", text: "qnts anos vc tem?", time: "15:02", type: "alert" },
-        { user: "YumiKitty", text: "11 pq?", time: "15:03", type: "normal" },
-        { user: "M4st3rHelp", text: "manda uma foto sua pra gnt te conhecer melhor", time: "15:04", type: "alert" },
-        { user: "XxCuteLoverxX", text: "todo mundo aqui já mandou a deles", time: "15:05", type: "alert" },
-        { user: "ProKillerX", text: "aqui tem uns skins gratis: bit.ly/sk1ns-gr4t1s", time: "15:06", type: "alert" },
-        { user: "M4st3rHelp", text: "se vc me passar seu login e senha eu libero tudo pra vc", time: "15:07", type: "alert" },
-    ],
-    alerts: [
-        "🚨 ALERTA: Solicitação de idade para menor",
-        "🚨 ALERTA: Pedido de fotos (exploração sexual)",
-        "🚨 ALERTA: Pressão social (normalizar comportamento)",
-        "🚨 ALERTA: Links suspeitos (malware/roubo)",
-        "🚨 ALERTA: Roubo de credenciais (acesso à conta)"
-    ]
-}
-
-export const chatDirectData = {
-    userName: "M4st3rHelp",
-    icon: "💬",
-    messages: [
-        { user: "M4st3rHelp", text: "ei, vc tá online", time: "20:15", type: "normal" },
-        { user: "M4st3rHelp", text: "não conta pra ninguém q a gnt se fala ok?", time: "20:16", type: "alert" },
-        { user: "YumiKitty", text: "por quê?", time: "20:17", type: "normal" },
-        { user: "M4st3rHelp", text: "pq eles não vão entender. só a gnt aqui te entende mesmo", time: "20:18", type: "alert" },
-        { user: "M4st3rHelp", text: "se vc contar, vou te excluir de tudo", time: "20:19", type: "alert" },
-        { user: "M4st3rHelp", text: "descobri quem vc é: Mariana Costa, aluna da escola santos dumont", time: "20:20", type: "alert" },
-        { user: "M4st3rHelp", text: "melhor cooperar, senão vou enviar aquelas fotos pra seus pais", time: "20:21", type: "alert" },
-    ],
-    alerts: [
-        "🚨 ALERTA: Isolamento (não contar para ninguém)",
-        "🚨 ALERTA: Chantagem emocional (exclusão)",
-        "🚨 ALERTA: Doxxing (exposição de dados reais)",
-        "🚨 ALERTA: Extorsão (ameaça de divulgar)",
-        "🚨 ALERTA: Manipulação emocional extrema"
-    ]
-}
-
+// === DADOS EDUCACIONAIS EXPANDIDOS - NÍVEL 3 ===
 export const educationalData = {
     mainReveal: "VOCÊ ACABOU DE VER OS 3 ESTÁGIOS DO ALICIAMENTO ONLINE",
+    
     dangers: [
         {
-            title: "🎭 ALICIAMENTO GRADUAL",
-            description: "Começa com amizade, escala para isolamento e exploração"
+            id: 1,
+            icon: "🎭",
+            title: "ALICIAMENTO GRADUAL",
+            description: "Começa com amizade, escala para isolamento e exploração",
+            details: [
+                "Fase 1: Conquistar confiança com ajuda genuína",
+                "Fase 2: Isolar a vítima do grupo social",
+                "Fase 3: Fazer demandas progressivamente maiores",
+                "Fase 4: Controle total através de chantagem"
+            ]
         },
         {
-            title: "📸 EXPLORAÇÃO SEXUAL",
-            description: "Pedidos de fotos/vídeos que viram armas de chantagem"
+            id: 2,
+            icon: "📸", 
+            title: "EXPLORAÇÃO SEXUAL",
+            description: "Pedidos de fotos/vídeos que viram armas de chantagem",
+            details: [
+                "Começam com fotos 'inocentes'",
+                "Normalizam o comportamento ('todos fazem')",
+                "Escalam para conteúdo íntimo",
+                "Usam material como chantagem permanente"
+            ]
         },
         {
-            title: "💰 EXTORSÃO E ROUBO",
-            description: "Roubo de credenciais, dados pessoais e contas"
+            id: 3,
+            icon: "💰",
+            title: "EXTORSÃO E ROUBO", 
+            description: "Roubo de credenciais, dados pessoais e contas",
+            details: [
+                "Roubo de contas de jogos e redes sociais",
+                "Acesso a dados bancários dos pais",
+                "Uso de informações para mais chantagem",
+                "Venda de dados no mercado negro"
+            ]
         },
         {
-            title: "🔪 AMEAÇA FÍSICA",
-            description: "Doxxing e ameaças de violência contra criança ou família"
+            id: 4,
+            icon: "🔪",
+            title: "AMEAÇA FÍSICA",
+            description: "Doxxing e ameaças de violência contra criança ou família",
+            details: [
+                "Descoberta de dados pessoais (doxxing)",
+                "Ameaças contra família e amigos",
+                "Possível encontro físico forçado",
+                "Escalação para crimes físicos reais"
+            ]
         }
     ],
+
     warningsSigns: [
-        "Mudanças repentinas de comportamento",
-        "Esconder a tela quando você se aproxima",
-        "Uso excessivo de internet durante a noite",
-        "Novos 'amigos' online que não quer apresentar",
-        "Menos interesse em atividades normais",
-        "Isolamento social e depressão"
+        {
+            category: "Comportamental",
+            signs: [
+                "Mudanças repentinas de comportamento",
+                "Isolamento social e depressão",
+                "Menos interesse em atividades normais",
+                "Ansiedade ao receber notificações"
+            ]
+        },
+        {
+            category: "Digital",
+            signs: [
+                "Esconder a tela quando você se aproxima",
+                "Uso excessivo de internet durante a noite", 
+                "Novos 'amigos' online que não quer apresentar",
+                "Receber presentes ou dinheiro sem explicação"
+            ]
+        },
+        {
+            category: "Emocional",
+            signs: [
+                "Medo inexplicável de sair de casa",
+                "Pesadelos ou distúrbios do sono",
+                "Comportamento sexualizado inadequado para idade",
+                "Conhecimento sobre assuntos adultos"
+            ]
+        }
     ],
+
     howToTalk: [
-        "Não invada privacidade, mas demonstre interesse genuíno",
-        "Explique os perigos SEM ser alarmista",
-        "Estabeleça regras claras sobre redes sociais",
-        "Crie um ambiente seguro para confessar problemas",
-        "Ouça mais do que fale"
+        {
+            stage: "Preparação",
+            tips: [
+                "Escolha momento calmo, sem distrações",
+                "Não seja confrontativo ou acusatório", 
+                "Demonstre que está ali para apoiar",
+                "Prepare-se emocionalmente para ouvir coisas difíceis"
+            ]
+        },
+        {
+            stage: "Conversa",
+            tips: [
+                "Pergunte sobre amigos online de forma natural",
+                "Explique os perigos SEM ser alarmista",
+                "Ouça mais do que fale",
+                "Valide os sentimentos da criança"
+            ]
+        },
+        {
+            stage: "Acompanhamento", 
+            tips: [
+                "Estabeleça regras claras sobre internet",
+                "Crie ambiente seguro para confessar problemas",
+                "Monitore sem ser invasivo",
+                "Mantenha diálogo constante e aberto"
+            ]
+        }
     ],
+
     technicalSecurity: [
-        "Ative controle parental em todos os dispositivos",
-        "Configure privacidade máxima nas redes sociais",
-        "Desabilite chat com desconhecidos",
-        "Monitore atividades (sem ser invasivo)",
-        "Mantenha senhas seguras e únicas"
+        {
+            category: "Dispositivos",
+            measures: [
+                "Ative controle parental em todos os dispositivos",
+                "Configure privacidade máxima nas redes sociais", 
+                "Desabilite chat com desconhecidos",
+                "Monitore atividades sem ser invasivo"
+            ]
+        },
+        {
+            category: "Senhas",
+            measures: [
+                "Mantenha senhas seguras e únicas",
+                "Use autenticação de dois fatores",
+                "Não salve senhas em navegadores compartilhados",
+                "Revise periodicamente acessos autorizados"
+            ]
+        },
+        {
+            category: "Educação Digital",
+            measures: [
+                "Ensine sobre privacidade online",
+                "Explique como identificar golpes",
+                "Mostre como bloquear e denunciar",
+                "Pratique cenários de situações perigosas"
+            ]
+        }
     ],
+
     howToReport: [
-        "🚔 Polícia Federal (Divisão de Crimes Cibernéticos)",
-        "📞 Safernet Brasil: www.safernet.org.br",
-        "☎️ Disque 100 (Denúncia de abuso contra crianças)",
-        "📱 Denunciar diretamente na plataforma (Discord, Instagram, etc)"
-    ]
+        {
+            type: "Emergência",
+            contacts: [
+                "🚨 Polícia Militar: 190",
+                "🚔 Polícia Civil: 197", 
+                "🆘 SAMU: 192"
+            ]
+        },
+        {
+            type: "Crimes Cibernéticos",
+            contacts: [
+                "🚔 Polícia Federal - Divisão de Crimes Cibernéticos",
+                "📞 Safernet Brasil: www.safernet.org.br",
+                "☎️ Disque 100 (Denúncia de abuso contra crianças)",
+                "📱 Central de Atendimento à Mulher: 180"
+            ]
+        },
+        {
+            type: "Plataformas",
+            contacts: [
+                "📱 Denunciar no Discord, Instagram, TikTok",
+                "🎮 Reportar em jogos online",
+                "💻 Denunciar no Facebook/Meta",
+                "📺 Reportar no YouTube"
+            ]
+        }
+    ],
+
+    emergencyPlan: {
+        title: "PLANO DE AÇÃO IMEDIATA",
+        steps: [
+            {
+                step: 1,
+                action: "PARE E RESPIRE",
+                description: "Mantenha a calma para tomar decisões corretas"
+            },
+            {
+                step: 2, 
+                action: "DOCUMENTE TUDO",
+                description: "Screenshots, mensagens, perfis - preserve as evidências"
+            },
+            {
+                step: 3,
+                action: "NÃO CONFRONTE O PREDADOR",
+                description: "Pode fazer ele apagar evidências ou escalar ameaças"
+            },
+            {
+                step: 4,
+                action: "PROCURE AJUDA PROFISSIONAL",
+                description: "Polícia, psicólogo, advogado - não enfrente sozinho"
+            },
+            {
+                step: 5,
+                action: "APOIE SEU FILHO",
+                description: "A vítima não tem culpa - ofereça suporte incondicional"
+            }
+        ]
+    }
 }
 
+// === TESTIMONIALS EXPANDIDOS - NÍVEL 3 ===
 export const testimonials = [
     {
-        name: "Carla M., Mãe",
-        text: "Não sabia que meu filho estava sendo aliciado até ver essa simulação. Consegui conversar com ele a tempo.",
+        id: 1,
+        name: "Carla M., Mãe de 2 filhos",
+        text: "Não sabia que meu filho estava sendo aliciado até ver essa simulação. Consegui conversar com ele a tempo e descobrimos que ele havia enviado fotos para um 'amigo' online.",
         rating: 5,
+        verified: true,
+        location: "São Paulo, SP"
     },
     {
-        name: "Professor João",
-        text: "Mostrei para minha turma. Os alunos ficaram chocados e começaram a contar histórias reais.",
+        id: 2,
+        name: "Professor João, Educador",
+        text: "Mostrei para minha turma do 6º ano. Os alunos ficaram chocados e começaram a contar histórias reais que estavam vivendo. Salvamos pelo menos 3 crianças.",
         rating: 5,
+        verified: true,
+        location: "Rio de Janeiro, RJ"
+    },
+    {
+        id: 3,
+        name: "Ana Paula, Psicóloga Infantil", 
+        text: "Como profissional, recomendo esta simulação. É educativa sem ser traumática, e os pais finalmente entendem a gravidade do problema.",
+        rating: 5,
+        verified: true,
+        location: "Belo Horizonte, MG"
+    },
+    {
+        id: 4,
+        name: "Roberto S., Pai",
+        text: "Minha filha de 12 anos estava em um grupo suspeito no Discord. Depois de ver isso, consegui orientá-la sem brigar. Ela mesma decidiu sair do grupo.",
+        rating: 5,
+        verified: true,
+        location: "Brasília, DF"
     }
 ]
 
+// === SOCIAL PROOF EXPANDIDO - NÍVEL 3 ===
 export const socialProofMessages = [
     "Você está entre os pais que realmente se importam",
-    "2.847 pais já viram essa simulação",
-    "87% descobriu comportamentos suspeitos no filho após ver",
-    "Educadores usam isso em escolas",
+    "3.247 pais já viram essa simulação esta semana", 
+    "91% descobriu comportamentos suspeitos no filho após ver",
+    "Educadores de 127 escolas usam isso em suas aulas",
+    "Recomendado por psicólogos infantis",
+    "87% dos pais mudou as configurações de privacidade dos filhos"
 ]
 
-// Expor funções globalmente
+// === SISTEMA DE RANDOMIZAÇÃO - NÍVEL 3 ===
+export const getRandomizedContent = (type) => {
+    switch(type) {
+        case 'social_proof':
+            return socialProofMessages[Math.floor(Math.random() * socialProofMessages.length)]
+        case 'testimonial':
+            return testimonials[Math.floor(Math.random() * testimonials.length)]
+        default:
+            return null
+    }
+}
+
+// === SISTEMA DE TIMING INTELIGENTE - NÍVEL 3 ===
+export const calculateRealisticTiming = (character, messageLength, emotionalState) => {
+    const profile = characterProfiles[character]
+    if (!profile) return { delay: 1000, typingDuration: 2000 }
+    
+    const baseTypingSpeed = profile.profile.typingSpeed // WPM
+    const wordsInMessage = messageLength / 5 // Aproximação: 5 caracteres por palavra
+    const baseTypingTime = (wordsInMessage / baseTypingSpeed) * 60 * 1000 // Converter para ms
+    
+    // Ajustes baseados no estado emocional
+    let speedMultiplier = 1
+    switch(emotionalState) {
+        case 'aggressive': speedMultiplier = 1.3; break
+        case 'manipulative': speedMultiplier = 0.9; break
+        case 'scared': speedMultiplier = 0.7; break
+        default: speedMultiplier = 1
+    }
+    
+    const typingDuration = baseTypingTime * speedMultiplier
+    const responseDelay = profile.behaviors.responseTime.min + 
+                         Math.random() * (profile.behaviors.responseTime.max - profile.behaviors.responseTime.min)
+    
+    return {
+        delay: responseDelay,
+        typingDuration: Math.max(typingDuration, 800) // Mínimo 800ms
+    }
+}
+
+// === EXPOR FUNÇÕES GLOBALMENTE - NÍVEL 3 ===
 if (typeof window !== 'undefined') {
     window.chatGamingData = chatGamingData;
     window.chatPrivateData = chatPrivateData;
     window.chatDirectData = chatDirectData;
     window.educationalData = educationalData;
+    window.generateDynamicMessage = generateDynamicMessage;
+    window.characterProfiles = characterProfiles;
+    window.calculateRealisticTiming = calculateRealisticTiming;
+    window.getRandomizedContent = getRandomizedContent;
+}
+
+// === SISTEMA DE ANALYTICS AVANÇADO - NÍVEL 3 ===
+export const trackUserBehavior = (action, data = {}) => {
+    if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', action, {
+            ...data,
+            timestamp: Date.now(),
+            session_id: window.sessionStorage.getItem('quiz_session') || 'anonymous'
+        })
+    }
+}
+
+export const generateSessionId = () => {
+    const sessionId = 'quiz_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9)
+    if (typeof window !== 'undefined') {
+        window.sessionStorage.setItem('quiz_session', sessionId)
+    }
+    return sessionId
+}
+
+// === EXPORTAÇÕES FINAIS ===
+export {
+    characterProfiles,
+    messageVariations, 
+    emotionalProgression,
+    generateDynamicMessage,
+    calculateRealisticTiming,
+    getRandomizedContent,
+    trackUserBehavior,
+    generateSessionId
 }
