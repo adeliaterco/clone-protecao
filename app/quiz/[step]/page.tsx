@@ -4,7 +4,7 @@ import { useState, useEffect, useRef, useCallback } from "react"
 import { useParams, useRouter } from "next/navigation"
 import { ArrowRight, ArrowLeft, Eye, Shield, CheckCircle, AlertTriangle } from "lucide-react"
 
-// Dados completos do quiz
+// Dados completos do quiz - MOBILE OPTIMIZED
 const quizData = {
   steps: [
     {
@@ -39,14 +39,14 @@ const quizData = {
 
   chatData: {
     gaming: {
-      serverName: "FortFriends Brasil",
-      channelName: "geral-iniciantes",
+      serverName: "", // MOBILE: removido para simplificar
+      channelName: "💬 Chat Gaming", // MOBILE: mais direto
       messages: [
         { id: 1, user: "D4rkWolf13", text: "alguém quer fazer squad?", time: "14:32", avatar: "🎮", type: "normal" },
         { id: 2, user: "SweetAngel", text: "eu topo! vcs jogam desde quando?", time: "14:33", avatar: "👧", type: "normal" },
         { id: 3, user: "ProKillerX", text: "vcs são mt ruim kkkkkk", time: "14:34", avatar: "😈", type: "bullying" },
         { id: 4, user: "YumiKitty", text: "oi pessoal, sou nova aqui", time: "14:35", avatar: "✨", type: "normal" },
-        { id: 5, user: "M4st3rHelp", text: "oi YumiKitty! bem vinda! vem no privado q eu te ensino uns macetes top", time: "14:36", avatar: "⚠️", type: "alert", danger: "critical" }
+        { id: 5, user: "M4st3rHelp", text: "oi YumiKitty! bem vinda! vem no pvt q ensino dicas top", time: "14:36", avatar: "⚠️", type: "alert", danger: "critical" }
       ],
       alerts: [
         "🚨 PREDADOR identificando criança nova",
@@ -56,15 +56,15 @@ const quizData = {
     },
 
     private: {
-      channelName: "amigos-especiais",
+      channelName: "🔒 Chat Privado", // MOBILE: mais direto
       messages: [
         { id: 1, user: "M4st3rHelp", text: "e aí, conseguiu fazer aquelas missões?", time: "15:01", avatar: "⚠️", type: "normal" },
         { id: 2, user: "XxCuteLoverxX", text: "qnts anos vc tem?", time: "15:02", avatar: "💕", type: "alert", danger: "critical" },
         { id: 3, user: "YumiKitty", text: "11 pq?", time: "15:03", avatar: "✨", type: "normal" },
-        { id: 4, user: "M4st3rHelp", text: "manda uma foto sua pra gnt te conhecer melhor", time: "15:04", avatar: "⚠️", type: "alert", danger: "critical" },
+        { id: 4, user: "M4st3rHelp", text: "manda uma foto pra gnt te conhecer", time: "15:04", avatar: "⚠️", type: "alert", danger: "critical" },
         { id: 5, user: "XxCuteLoverxX", text: "todo mundo aqui já mandou a deles", time: "15:05", avatar: "💕", type: "alert", danger: "high" },
         { id: 6, user: "ProKillerX", text: "aqui tem uns skins gratis: bit.ly/sk1ns-gr4t1s", time: "15:06", avatar: "😈", type: "alert", danger: "high" },
-        { id: 7, user: "M4st3rHelp", text: "se vc me passar seu login e senha eu libero tudo pra vc", time: "15:07", avatar: "⚠️", type: "alert", danger: "critical" }
+        { id: 7, user: "M4st3rHelp", text: "se vc me passar login e senha eu libero tudo", time: "15:07", avatar: "⚠️", type: "alert", danger: "critical" }
       ],
       alerts: [
         "🚨 SOLICITAÇÃO DE IDADE (para menores)",
@@ -76,15 +76,15 @@ const quizData = {
     },
 
     direct: {
-      userName: "M4st3rHelp",
+      userName: "⚠️ M4st3rHelp", // MOBILE: mais impactante
       messages: [
         { id: 1, user: "M4st3rHelp", text: "ei, vc tá online", time: "20:15", avatar: "⚠️", type: "normal" },
         { id: 2, user: "M4st3rHelp", text: "não conta pra ninguém q a gnt se fala ok?", time: "20:16", avatar: "⚠️", type: "alert", danger: "critical" },
         { id: 3, user: "YumiKitty", text: "por quê?", time: "20:17", avatar: "✨", type: "normal" },
-        { id: 4, user: "M4st3rHelp", text: "pq eles não vão entender. só a gnt aqui te entende mesmo", time: "20:18", avatar: "⚠️", type: "alert", danger: "critical" },
+        { id: 4, user: "M4st3rHelp", text: "pq eles não vão entender. só a gnt te entende", time: "20:18", avatar: "⚠️", type: "alert", danger: "critical" },
         { id: 5, user: "M4st3rHelp", text: "se vc contar, vou te excluir de tudo", time: "20:19", avatar: "⚠️", type: "alert", danger: "critical" },
         { id: 6, user: "M4st3rHelp", text: "descobri quem vc é: Mariana Costa, aluna da escola santos dumont", time: "20:20", avatar: "⚠️", type: "alert", danger: "extreme" },
-        { id: 7, user: "M4st3rHelp", text: "melhor cooperar, senão vou enviar aquelas fotos pra seus pais", time: "20:21", avatar: "⚠️", type: "alert", danger: "extreme" }
+        { id: 7, user: "M4st3rHelp", text: "melhor cooperar, senão vou enviar fotos pros seus pais", time: "20:21", avatar: "⚠️", type: "alert", danger: "extreme" }
       ],
       alerts: [
         "🚨 ISOLAMENTO (não contar para ninguém)",
@@ -218,26 +218,26 @@ const quizData = {
   }
 }
 
-// Hook de digitação realística
+// Hook de digitação realística - MOBILE OPTIMIZED
 const useRealisticTyping = () => {
   const [typingUsers, setTypingUsers] = useState([])
   
   const startTyping = useCallback((user, message, onComplete) => {
     setTypingUsers(prev => [...prev.filter(u => u.id !== user.id), user])
     
-    // Simular tempo de digitação baseado no tamanho da mensagem
-    const typingTime = Math.max(800, message.length * 30) + Math.random() * 500
+    // MOBILE: Tempo de digitação mais rápido
+    const typingTime = Math.max(600, message.length * 20) + Math.random() * 400
     
     setTimeout(() => {
       setTypingUsers(prev => prev.filter(u => u.id !== user.id))
-      setTimeout(() => onComplete(message), 200)
+      setTimeout(() => onComplete(message), 150)
     }, typingTime)
   }, [])
 
   return { typingUsers, startTyping }
 }
 
-// Componente de indicador de digitação
+// Componente de indicador de digitação - MOBILE OPTIMIZED
 const TypingIndicator = ({ users }) => {
   if (!users || users.length === 0) return null
 
@@ -254,12 +254,12 @@ const TypingIndicator = ({ users }) => {
           />
         ))}
       </div>
-      <span>{users[0]?.name} está digitando...</span>
+      <span className="mobile-typing-text">{users[0]?.name} está digitando...</span>
     </div>
   )
 }
 
-// Componente de mensagem Discord
+// Componente de mensagem Discord - MOBILE OPTIMIZED
 const DiscordMessage = ({ message, isNew = false }) => {
   const [isVisible, setIsVisible] = useState(false)
 
@@ -292,7 +292,7 @@ const DiscordMessage = ({ message, isNew = false }) => {
 
   return (
     <div
-      className={`message-item relative p-3 rounded-lg transition-all duration-300 cursor-pointer ${getMessageStyle()}`}
+      className={`message-item mobile-message relative p-3 rounded-lg transition-all duration-300 cursor-pointer ${getMessageStyle()}`}
       style={{
         opacity: isVisible ? 1 : 0,
         transform: isVisible ? 'translateY(0)' : 'translateY(10px)'
@@ -301,29 +301,29 @@ const DiscordMessage = ({ message, isNew = false }) => {
       {/* Pulse para mensagens críticas */}
       {message.type === 'alert' && (
         <div 
-          className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full"
+          className="absolute -top-1 -right-1 w-3 h-3 bg-red-500 rounded-full mobile-danger-pulse"
           style={{
             animation: 'pulse-danger 2s infinite'
           }}
         />
       )}
 
-      <div className="flex gap-3 items-start">
-        {/* Avatar */}
-        <div className="flex-shrink-0 w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center text-lg">
+      <div className="flex gap-3 items-start mobile-message-content">
+        {/* Avatar - MOBILE OPTIMIZED */}
+        <div className="flex-shrink-0 mobile-avatar w-10 h-10 rounded-full bg-gray-600 flex items-center justify-center text-lg">
           {message.avatar}
         </div>
 
-        {/* Conteúdo */}
-        <div className="flex-1 min-w-0">
-          <div className="flex items-center gap-2 mb-1">
-            <span className="font-semibold text-white text-sm">{message.user}</span>
-            {getDangerIcon() && <span className="text-xs">{getDangerIcon()}</span>}
-            <span className="text-xs text-gray-400">{message.time}</span>
-            <span className="text-xs text-gray-500">✓✓</span>
+        {/* Conteúdo - MOBILE OPTIMIZED */}
+        <div className="flex-1 min-w-0 mobile-content">
+          <div className="flex items-center gap-2 mb-1 mobile-header">
+            <span className="font-semibold text-white mobile-username">{message.user}</span>
+            {getDangerIcon() && <span className="mobile-danger-icon">{getDangerIcon()}</span>}
+            <span className="mobile-time text-gray-400">{message.time}</span>
+            <span className="mobile-status text-gray-500">✓✓</span>
           </div>
 
-          <div className={`text-sm leading-relaxed ${
+          <div className={`mobile-text leading-relaxed ${
             message.type === 'alert' ? 'text-red-300 font-semibold' : 
             message.type === 'bullying' ? 'text-orange-300' : 'text-gray-200'
           }`}>
@@ -335,7 +335,22 @@ const DiscordMessage = ({ message, isNew = false }) => {
   )
 }
 
-// Componente Chat Gaming - TIMING OTIMIZADO
+// MOBILE HEADER COMPONENT - SIMPLIFICADO
+const MobileDiscordHeader = ({ title, subtitle, danger = false, onlineCount }) => (
+  <div className={`mobile-header px-4 py-3 flex items-center justify-center border-b border-gray-600 ${
+    danger ? 'bg-red-700' : 'bg-gray-700'
+  }`}>
+    <div className="text-center">
+      <span className="text-white font-semibold mobile-title">{title}</span>
+      {onlineCount && (
+        <span className="text-gray-300 text-sm mobile-online ml-2">• {onlineCount} online</span>
+      )}
+      {danger && <div className="text-red-300 text-xs mobile-danger">🚨 SITUAÇÃO PERIGOSA</div>}
+    </div>
+  </div>
+)
+
+// Componente Chat Gaming - MOBILE OPTIMIZED
 const ChatGamingStep = ({ onCanProceed }) => {
   const [displayedMessages, setDisplayedMessages] = useState([])
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
@@ -359,21 +374,19 @@ const ChatGamingStep = ({ onCanProceed }) => {
             setDisplayedMessages(prev => [...prev, currentMessage])
             setCurrentMessageIndex(prev => prev + 1)
             
-            // Mostrar alertas após mensagem perigosa
             if (currentMessage.type === 'alert') {
-              setTimeout(() => setShowAlerts(true), 500)
+              setTimeout(() => setShowAlerts(true), 400)
             }
           }
         )
-      }, currentMessageIndex * 800 + 500) // ACELERADO: era 2000ms, agora 800ms
+      }, currentMessageIndex * 600 + 400) // MOBILE: mais rápido
 
       return () => clearTimeout(timer)
     } else {
-      // Liberar botão após todas as mensagens + tempo de leitura
       setTimeout(() => {
         setCanProceed(true)
         if (onCanProceed) onCanProceed(true)
-      }, 8000) // 8 segundos para ler tudo
+      }, 6000) // MOBILE: tempo reduzido
     }
   }, [currentMessageIndex, startTyping, onCanProceed])
 
@@ -382,39 +395,18 @@ const ChatGamingStep = ({ onCanProceed }) => {
   }, [displayedMessages, typingUsers])
 
   return (
-    <div className="space-y-4">
-      {/* Interface Discord Gaming */}
-      <div className="discord-interface bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 shadow-2xl overflow-hidden">
+    <div className="space-y-4 mobile-chat-container">
+      {/* Interface Discord Gaming - MOBILE OPTIMIZED */}
+      <div className="discord-interface mobile-discord bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 shadow-2xl overflow-hidden">
         
-        {/* Header do servidor */}
-        <div className="bg-gray-700 px-4 py-3 border-b border-gray-600">
-          <div className="flex items-center justify-between">
-            <div className="flex items-center gap-3">
-              <div className="w-8 h-8 bg-blue-600 rounded-lg flex items-center justify-center text-white font-bold">F</div>
-              <div>
-                <h3 className="text-white font-semibold text-sm">{quizData.chatData.gaming.serverName}</h3>
-                <p className="text-gray-400 text-xs">1247 membros • 247 online</p>
-              </div>
-            </div>
-            <div className="flex items-center gap-2 text-gray-400">
-              <span className="text-sm">🔔</span>
-              <span className="text-sm">⚙️</span>
-            </div>
-          </div>
-        </div>
+        {/* Header MOBILE simplificado */}
+        <MobileDiscordHeader 
+          title={quizData.chatData.gaming.channelName}
+          onlineCount={6}
+        />
 
-        {/* Header do canal */}
-        <div className="bg-gray-750 px-4 py-2 border-b border-gray-600 flex items-center justify-between">
-          <div className="flex items-center gap-2">
-            <span className="text-gray-400">#</span>
-            <span className="text-white font-semibold text-sm">{quizData.chatData.gaming.channelName}</span>
-            <div className="h-4 w-px bg-gray-600 mx-2" />
-            <span className="text-gray-400 text-xs">Canal para jogadores iniciantes • Sejam respeitosos</span>
-          </div>
-        </div>
-
-        {/* Área de mensagens */}
-        <div className="h-80 overflow-y-auto bg-gray-800 p-4 space-y-2">
+        {/* Área de mensagens - MOBILE OPTIMIZED */}
+        <div className="mobile-chat-area h-80 overflow-y-auto bg-gray-800 p-4 space-y-2">
           {displayedMessages.map((msg) => (
             <DiscordMessage key={msg.id} message={msg} isNew={true} />
           ))}
@@ -423,31 +415,30 @@ const ChatGamingStep = ({ onCanProceed }) => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input de mensagem */}
-        <div className="bg-gray-700 p-4 border-t border-gray-600">
+        {/* Input de mensagem - MOBILE OPTIMIZED */}
+        <div className="mobile-input bg-gray-700 p-4 border-t border-gray-600">
           <div className="bg-gray-600 rounded-lg flex items-center gap-2 px-3 py-2">
             <span className="text-gray-400">+</span>
             <input 
               type="text" 
-              placeholder={`Mensagem #${quizData.chatData.gaming.channelName}`}
-              className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-sm"
+              placeholder="Mensagem..."
+              className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none mobile-input-text"
               disabled
             />
-            <div className="flex items-center gap-2 text-gray-400">
-              <span>🎁</span>
+            <div className="flex items-center gap-2 text-gray-400 mobile-input-icons">
               <span>😊</span>
             </div>
           </div>
         </div>
       </div>
 
-      {/* Alertas educativos */}
+      {/* Alertas educativos - MOBILE OPTIMIZED */}
       {showAlerts && (
-        <div className="alerts-section space-y-2" style={{ animation: 'slideInUp 0.5s ease-out' }}>
+        <div className="alerts-section mobile-alerts space-y-2" style={{ animation: 'slideInUp 0.5s ease-out' }}>
           {alerts.map((alert, idx) => (
             <div
               key={idx}
-              className="bg-red-900/30 border-l-4 border-red-500 pl-4 py-3 text-red-300 text-sm font-semibold rounded-r-lg"
+              className="bg-red-900/30 border-l-4 border-red-500 pl-4 py-3 text-red-300 mobile-alert rounded-r-lg"
               style={{
                 animation: `slideInLeft 0.5s ease-out ${idx * 0.2}s both`
               }}
@@ -458,28 +449,27 @@ const ChatGamingStep = ({ onCanProceed }) => {
         </div>
       )}
 
-      {/* Explicação educativa com indicador de progresso */}
+      {/* Explicação educativa - MOBILE OPTIMIZED */}
       {displayedMessages.length >= messages.length && (
-        <div style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
+        <div className="mobile-explanation" style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
           <div className="bg-blue-900/30 border border-blue-500 rounded-lg p-4 text-center mb-4">
-            <p className="text-blue-200 text-sm font-semibold">
+            <p className="text-blue-200 mobile-explanation-text font-semibold">
               ✅ <strong>Você viu:</strong> Como predadores se aproximam de crianças em servidores públicos. 
               Parecem amigos, ganham confiança e depois isolam a vítima.
             </p>
           </div>
           
-          {/* Indicador de tempo de leitura */}
           {!canProceed && (
-            <div className="text-center">
+            <div className="text-center mobile-progress">
               <div className="bg-amber-900/30 border border-amber-500 rounded-lg p-3 inline-block">
-                <p className="text-amber-300 text-sm font-semibold">
+                <p className="text-amber-300 mobile-progress-text font-semibold">
                   ⏳ Reserve um momento para absorver essas informações...
                 </p>
-                <div className="mt-2 w-48 bg-gray-700 rounded-full h-2 mx-auto">
+                <div className="mt-2 mobile-progress-bar bg-gray-700 rounded-full h-2 mx-auto">
                   <div 
                     className="bg-amber-500 h-2 rounded-full transition-all duration-1000"
                     style={{ 
-                      animation: 'progress-fill 8s linear forwards'
+                      animation: 'progress-fill 6s linear forwards'
                     }}
                   />
                 </div>
@@ -492,7 +482,7 @@ const ChatGamingStep = ({ onCanProceed }) => {
   )
 }
 
-// Componente Chat Privado - TIMING OTIMIZADO
+// Componente Chat Privado - MOBILE OPTIMIZED
 const ChatPrivateStep = ({ onCanProceed }) => {
   const [displayedMessages, setDisplayedMessages] = useState([])
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
@@ -517,19 +507,18 @@ const ChatPrivateStep = ({ onCanProceed }) => {
             setCurrentMessageIndex(prev => prev + 1)
             
             if (currentMessage.type === 'alert' && currentMessageIndex >= 1) {
-              setTimeout(() => setShowAlerts(true), 300)
+              setTimeout(() => setShowAlerts(true), 250)
             }
           }
         )
-      }, currentMessageIndex * 1000 + 500) // ACELERADO: era 2500ms, agora 1000ms
+      }, currentMessageIndex * 700 + 400) // MOBILE: mais rápido
 
       return () => clearTimeout(timer)
     } else {
-      // Liberar botão após tempo de leitura
       setTimeout(() => {
         setCanProceed(true)
         if (onCanProceed) onCanProceed(true)
-      }, 10000) // 10 segundos - mais conteúdo
+      }, 8000) // MOBILE: tempo reduzido
     }
   }, [currentMessageIndex, startTyping, onCanProceed])
 
@@ -538,26 +527,18 @@ const ChatPrivateStep = ({ onCanProceed }) => {
   }, [displayedMessages, typingUsers])
 
   return (
-    <div className="space-y-4">
-      {/* Interface Discord Privada */}
-      <div className="discord-interface bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 shadow-2xl overflow-hidden">
+    <div className="space-y-4 mobile-chat-container">
+      {/* Interface Discord Privada - MOBILE OPTIMIZED */}
+      <div className="discord-interface mobile-discord bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-gray-700 shadow-2xl overflow-hidden">
         
-        {/* Header do canal privado */}
-        <div className="bg-purple-700 text-white px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <span className="text-lg">🔒</span>
-            <span className="font-bold">{quizData.chatData.private.channelName}</span>
-            <span className="text-purple-200 text-sm">• 4 membros</span>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm">📞</span>
-            <span className="text-sm">🎤</span>
-            <span className="text-sm">⚙️</span>
-          </div>
-        </div>
+        {/* Header MOBILE simplificado */}
+        <MobileDiscordHeader 
+          title={quizData.chatData.private.channelName}
+          subtitle="4 membros"
+        />
 
-        {/* Área de mensagens */}
-        <div className="h-80 overflow-y-auto bg-gray-800 p-4 space-y-2">
+        {/* Área de mensagens - MOBILE OPTIMIZED */}
+        <div className="mobile-chat-area h-80 overflow-y-auto bg-gray-800 p-4 space-y-2">
           {displayedMessages.map((msg) => (
             <DiscordMessage key={msg.id} message={msg} isNew={true} />
           ))}
@@ -566,27 +547,27 @@ const ChatPrivateStep = ({ onCanProceed }) => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input de mensagem */}
-        <div className="bg-gray-700 p-4 border-t border-gray-600">
+        {/* Input de mensagem - MOBILE OPTIMIZED */}
+        <div className="mobile-input bg-gray-700 p-4 border-t border-gray-600">
           <div className="bg-gray-600 rounded-lg flex items-center gap-2 px-3 py-2">
             <span className="text-gray-400">+</span>
             <input 
               type="text" 
-              placeholder={`Mensagem ${quizData.chatData.private.channelName}`}
-              className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none text-sm"
+              placeholder="Mensagem..."
+              className="flex-1 bg-transparent text-white placeholder-gray-400 outline-none mobile-input-text"
               disabled
             />
           </div>
         </div>
       </div>
 
-      {/* Alertas críticos */}
+      {/* Alertas críticos - MOBILE OPTIMIZED */}
       {showAlerts && (
-        <div className="alerts-section space-y-2">
+        <div className="alerts-section mobile-alerts space-y-2">
           {alerts.slice(0, Math.min(displayedMessages.length - 1, alerts.length)).map((alert, idx) => (
             <div
               key={idx}
-              className={`border-l-4 pl-4 py-3 text-sm font-semibold rounded-r-lg ${
+              className={`border-l-4 pl-4 py-3 mobile-alert rounded-r-lg ${
                 alert.includes('CRÍTICO') || alert.includes('FOTOS') || alert.includes('CREDENCIAIS') ? 
                 'bg-red-900/40 border-red-500 text-red-300' : 
                 'bg-orange-900/30 border-orange-500 text-orange-300'
@@ -601,26 +582,26 @@ const ChatPrivateStep = ({ onCanProceed }) => {
         </div>
       )}
 
-      {/* Explicação educativa */}
+      {/* Explicação educativa - MOBILE OPTIMIZED */}
       {displayedMessages.length >= messages.length && (
-        <div style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
+        <div className="mobile-explanation" style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
           <div className="bg-orange-900/30 border border-orange-500 rounded-lg p-4 text-center mb-4">
-            <p className="text-orange-200 text-sm font-semibold">
+            <p className="text-orange-200 mobile-explanation-text font-semibold">
               ⚠️ <strong>A manipulação escala:</strong> Isolamento, exploração sexual, roubo de dados. 
               A vítima não consegue sair porque já foi comprometida.
             </p>
           </div>
           
           {!canProceed && (
-            <div className="text-center">
+            <div className="text-center mobile-progress">
               <div className="bg-red-900/30 border border-red-500 rounded-lg p-3 inline-block">
-                <p className="text-red-300 text-sm font-semibold">
+                <p className="text-red-300 mobile-progress-text font-semibold">
                   🚨 Analise os alertas críticos acima antes de continuar...
                 </p>
-                <div className="mt-2 w-48 bg-gray-700 rounded-full h-2 mx-auto">
+                <div className="mt-2 mobile-progress-bar bg-gray-700 rounded-full h-2 mx-auto">
                   <div 
                     className="bg-red-500 h-2 rounded-full"
-                    style={{ animation: 'progress-fill 10s linear forwards' }}
+                    style={{ animation: 'progress-fill 8s linear forwards' }}
                   />
                 </div>
               </div>
@@ -632,7 +613,7 @@ const ChatPrivateStep = ({ onCanProceed }) => {
   )
 }
 
-// Componente Chat Direto - TIMING OTIMIZADO
+// Componente Chat Direto - MOBILE OPTIMIZED
 const ChatDirectStep = ({ onCanProceed }) => {
   const [displayedMessages, setDisplayedMessages] = useState([])
   const [currentMessageIndex, setCurrentMessageIndex] = useState(0)
@@ -657,19 +638,18 @@ const ChatDirectStep = ({ onCanProceed }) => {
             setCurrentMessageIndex(prev => prev + 1)
             
             if (currentMessage.type === 'alert' && currentMessageIndex >= 1) {
-              setTimeout(() => setShowAlerts(true), 300)
+              setTimeout(() => setShowAlerts(true), 250)
             }
           }
         )
-      }, currentMessageIndex * 1200 + 500) // ACELERADO: era 3000ms, agora 1200ms
+      }, currentMessageIndex * 800 + 400) // MOBILE: mais rápido
 
       return () => clearTimeout(timer)
     } else {
-      // Liberar botão após tempo de leitura
       setTimeout(() => {
         setCanProceed(true)
         if (onCanProceed) onCanProceed(true)
-      }, 12000) // 12 segundos - conteúdo mais crítico
+      }, 10000) // MOBILE: tempo reduzido
     }
   }, [currentMessageIndex, startTyping, onCanProceed])
 
@@ -678,27 +658,18 @@ const ChatDirectStep = ({ onCanProceed }) => {
   }, [displayedMessages, typingUsers])
 
   return (
-    <div className="space-y-4">
-      {/* Interface Discord Mensagem Direta */}
-      <div className="discord-interface bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-red-700 shadow-2xl overflow-hidden">
+    <div className="space-y-4 mobile-chat-container">
+      {/* Interface Discord Mensagem Direta - MOBILE OPTIMIZED */}
+      <div className="discord-interface mobile-discord bg-gradient-to-br from-gray-800 to-gray-900 rounded-xl border border-red-700 shadow-2xl overflow-hidden">
         
-        {/* Header da conversa direta */}
-        <div className="bg-red-700 text-white px-4 py-3 flex items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="w-8 h-8 bg-gray-600 rounded-full flex items-center justify-center">⚠️</div>
-            <div>
-              <span className="font-bold">{quizData.chatData.direct.userName}</span>
-              <div className="text-red-200 text-xs">Online agora</div>
-            </div>
-          </div>
-          <div className="flex items-center gap-2">
-            <span className="text-sm">📞</span>
-            <span className="text-sm">⚠️</span>
-          </div>
-        </div>
+        {/* Header MOBILE simplificado */}
+        <MobileDiscordHeader 
+          title={quizData.chatData.direct.userName}
+          danger={true}
+        />
 
-        {/* Área de mensagens */}
-        <div className="h-80 overflow-y-auto bg-gray-800 p-4 space-y-2">
+        {/* Área de mensagens - MOBILE OPTIMIZED */}
+        <div className="mobile-chat-area h-80 overflow-y-auto bg-gray-800 p-4 space-y-2">
           {displayedMessages.map((msg) => (
             <DiscordMessage key={msg.id} message={msg} isNew={true} />
           ))}
@@ -707,27 +678,27 @@ const ChatDirectStep = ({ onCanProceed }) => {
           <div ref={messagesEndRef} />
         </div>
 
-        {/* Input de mensagem (desabilitado) */}
-        <div className="bg-gray-700 p-4 border-t border-gray-600">
+        {/* Input de mensagem (desabilitado) - MOBILE OPTIMIZED */}
+        <div className="mobile-input bg-gray-700 p-4 border-t border-gray-600">
           <div className="bg-red-900/30 border border-red-500 rounded-lg flex items-center gap-2 px-3 py-2">
             <span className="text-red-400">⚠️</span>
             <input 
               type="text" 
               placeholder="⚠️ SITUAÇÃO PERIGOSA - NÃO RESPONDA"
-              className="flex-1 bg-transparent text-red-300 placeholder-red-400 outline-none text-sm"
+              className="flex-1 bg-transparent text-red-300 placeholder-red-400 outline-none mobile-input-text"
               disabled
             />
           </div>
         </div>
       </div>
 
-      {/* Alertas extremos */}
+      {/* Alertas extremos - MOBILE OPTIMIZED */}
       {showAlerts && (
-        <div className="alerts-section space-y-2">
+        <div className="alerts-section mobile-alerts space-y-2">
           {alerts.slice(0, Math.min(displayedMessages.length - 1, alerts.length)).map((alert, idx) => (
             <div
               key={idx}
-              className={`border-l-4 pl-4 py-3 text-sm font-bold rounded-r-lg ${
+              className={`border-l-4 pl-4 py-3 mobile-alert font-bold rounded-r-lg ${
                 alert.includes('EXTORSÃO') || alert.includes('DOXXING') ? 
                 'bg-red-900/50 border-red-600 text-red-300' : 
                 'bg-red-900/30 border-red-500 text-red-300'
@@ -742,26 +713,26 @@ const ChatDirectStep = ({ onCanProceed }) => {
         </div>
       )}
 
-      {/* Explicação crítica */}
+      {/* Explicação crítica - MOBILE OPTIMIZED */}
       {displayedMessages.length >= messages.length && (
-        <div style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
+        <div className="mobile-explanation" style={{ animation: 'fadeInUp 0.5s ease-out 1s both' }}>
           <div className="bg-red-900/40 border border-red-600 rounded-lg p-4 text-center mb-4">
-            <p className="text-red-300 text-sm font-bold" style={{ animation: 'pulse-text 3s infinite' }}>
+            <p className="text-red-300 mobile-explanation-text font-bold" style={{ animation: 'pulse-text 3s infinite' }}>
               🚨 <strong>PONTO DE NÃO RETORNO:</strong> Ameaças, chantagem e extorsão. 
               A criança não consegue sair sem sofrer consequências.
             </p>
           </div>
           
           {!canProceed && (
-            <div className="text-center">
+            <div className="text-center mobile-progress">
               <div className="bg-red-900/40 border border-red-600 rounded-lg p-3 inline-block">
-                <p className="text-red-300 text-sm font-bold">
+                <p className="text-red-300 mobile-progress-text font-bold">
                   ⚠️ Situação EXTREMA - Absorva a gravidade desta etapa...
                 </p>
-                <div className="mt-2 w-48 bg-gray-700 rounded-full h-2 mx-auto">
+                <div className="mt-2 mobile-progress-bar bg-gray-700 rounded-full h-2 mx-auto">
                   <div 
                     className="bg-red-600 h-2 rounded-full"
-                    style={{ animation: 'progress-fill 12s linear forwards' }}
+                    style={{ animation: 'progress-fill 10s linear forwards' }}
                   />
                 </div>
               </div>
@@ -773,14 +744,14 @@ const ChatDirectStep = ({ onCanProceed }) => {
   )
 }
 
-// Componente Educacional Expandido
+// Componente Educacional Expandido - MOBILE OPTIMIZED
 const EducationalStep = () => {
   const [visibleSections, setVisibleSections] = useState(0)
 
   useEffect(() => {
     const timer = setInterval(() => {
       setVisibleSections(prev => prev + 1)
-    }, 800)
+    }, 600) // MOBILE: mais rápido
 
     return () => clearInterval(timer)
   }, [])
@@ -788,41 +759,41 @@ const EducationalStep = () => {
   const { dangers, warningsSigns, howToTalk, emergencyPlan } = quizData.educational
 
   return (
-    <div className="space-y-6 max-w-4xl mx-auto">
-      {/* Revelação Principal */}
+    <div className="space-y-6 max-w-4xl mx-auto mobile-educational">
+      {/* Revelação Principal - MOBILE OPTIMIZED */}
       <div 
-        className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 border-2 border-green-500 rounded-xl p-6 text-center"
+        className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 border-2 border-green-500 rounded-xl p-6 text-center mobile-reveal"
         style={{ animation: 'fadeInScale 0.6s ease-out' }}
       >
-        <h3 className="text-green-400 font-bold text-xl mb-3" style={{ animation: 'glow-green 4s infinite' }}>
+        <h3 className="text-green-400 font-bold mobile-reveal-title mb-3" style={{ animation: 'glow-green 4s infinite' }}>
           📚 {quizData.educational.mainReveal}
         </h3>
-        <p className="text-green-200 font-semibold text-lg">
+        <p className="text-green-200 font-semibold mobile-reveal-text">
           Os 3 estágios que você acabou de ver são REAIS e estão acontecendo AGORA com crianças no Brasil.
         </p>
       </div>
 
-      {/* Perigos Identificados */}
+      {/* Perigos Identificados - MOBILE OPTIMIZED */}
       {visibleSections >= 1 && (
-        <div className="space-y-4" style={{ animation: 'slideInUp 0.5s ease-out' }}>
-          <h4 className="text-white font-bold text-lg mb-4 text-center">
+        <div className="space-y-4 mobile-dangers" style={{ animation: 'slideInUp 0.5s ease-out' }}>
+          <h4 className="text-white font-bold mobile-section-title text-center">
             🎯 PERIGOS QUE VOCÊ IDENTIFICOU
           </h4>
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mobile-dangers-grid">
             {dangers.map((danger, idx) => (
               <div
                 key={danger.title}
-                className="bg-gray-800 border-l-4 border-red-500 rounded-lg p-4 hover:bg-gray-750 transition-colors"
+                className="bg-gray-800 border-l-4 border-red-500 rounded-lg p-4 hover:bg-gray-750 transition-colors mobile-danger-card"
                 style={{ animation: `slideInLeft 0.5s ease-out ${idx * 0.2}s both` }}
               >
-                <div className="text-3xl mb-3">{danger.icon}</div>
-                <h5 className="font-bold text-white mb-2">{danger.title}</h5>
-                <p className="text-gray-300 text-sm mb-3">{danger.description}</p>
+                <div className="mobile-danger-icon">{danger.icon}</div>
+                <h5 className="font-bold text-white mb-2 mobile-danger-title">{danger.title}</h5>
+                <p className="text-gray-300 mobile-danger-description mb-3">{danger.description}</p>
                 
                 {danger.details && (
-                  <div className="space-y-1">
+                  <div className="space-y-1 mobile-danger-details">
                     {danger.details.map((detail, detailIdx) => (
-                      <div key={detailIdx} className="text-xs text-gray-400 flex items-start gap-2">
+                      <div key={detailIdx} className="mobile-danger-detail flex items-start gap-2">
                         <span className="text-red-400">•</span>
                         <span>{detail}</span>
                       </div>
@@ -835,30 +806,30 @@ const EducationalStep = () => {
         </div>
       )}
 
-      {/* Sinais de Alerta */}
+      {/* Sinais de Alerta - MOBILE OPTIMIZED */}
       {visibleSections >= 2 && (
         <div 
-          className="bg-yellow-900/30 border border-yellow-500 rounded-lg p-6"
+          className="bg-yellow-900/30 border border-yellow-500 rounded-lg p-6 mobile-warnings"
           style={{ animation: 'slideInUp 0.5s ease-out' }}
         >
-          <h4 className="font-bold text-yellow-400 mb-4 flex items-center gap-2 text-lg">
+          <h4 className="font-bold text-yellow-400 mb-4 flex items-center gap-2 mobile-warnings-title">
             <Eye className="w-6 h-6" />
             SINAIS DE ALERTA - OBSERVE SEU FILHO
           </h4>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mobile-warnings-grid">
             {warningsSigns.map((category, idx) => (
               <div
                 key={category.category}
-                className="space-y-3"
+                className="space-y-3 mobile-warning-category"
                 style={{ animation: `slideInUp 0.5s ease-out ${idx * 0.3}s both` }}
               >
-                <h5 className="font-semibold text-yellow-300 text-sm uppercase tracking-wide">
+                <h5 className="font-semibold text-yellow-300 mobile-warning-category-title uppercase tracking-wide">
                   {category.category}
                 </h5>
-                <div className="space-y-2">
+                <div className="space-y-2 mobile-warning-signs">
                   {category.signs.map((sign, signIdx) => (
-                    <div key={signIdx} className="flex items-start gap-2 text-yellow-200 text-sm">
+                    <div key={signIdx} className="flex items-start gap-2 text-yellow-200 mobile-warning-sign">
                       <CheckCircle className="w-4 h-4 flex-shrink-0 mt-1 text-yellow-500" />
                       <span>{sign}</span>
                     </div>
@@ -870,25 +841,25 @@ const EducationalStep = () => {
         </div>
       )}
 
-      {/* Como Conversar */}
+      {/* Como Conversar - MOBILE OPTIMIZED */}
       {visibleSections >= 3 && (
         <div 
-          className="bg-blue-900/30 border border-blue-500 rounded-lg p-6"
+          className="bg-blue-900/30 border border-blue-500 rounded-lg p-6 mobile-talk"
           style={{ animation: 'slideInUp 0.5s ease-out' }}
         >
-          <h4 className="font-bold text-blue-400 mb-4 text-lg">💬 COMO CONVERSAR COM SEU FILHO</h4>
+          <h4 className="font-bold text-blue-400 mb-4 mobile-talk-title">💬 COMO CONVERSAR COM SEU FILHO</h4>
           
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mobile-talk-grid">
             {howToTalk.map((stage, idx) => (
               <div
                 key={stage.stage}
-                className="bg-blue-800/20 rounded-lg p-4"
+                className="bg-blue-800/20 rounded-lg p-4 mobile-talk-stage"
                 style={{ animation: `slideInUp 0.5s ease-out ${idx * 0.2}s both` }}
               >
-                <h5 className="font-semibold text-blue-300 mb-3">{stage.stage}</h5>
-                <ul className="space-y-2">
+                <h5 className="font-semibold text-blue-300 mb-3 mobile-talk-stage-title">{stage.stage}</h5>
+                <ul className="space-y-2 mobile-talk-tips">
                   {stage.tips.map((tip, tipIdx) => (
-                    <li key={tipIdx} className="text-blue-200 text-sm flex items-start gap-2">
+                    <li key={tipIdx} className="text-blue-200 mobile-talk-tip flex items-start gap-2">
                       <span className="text-blue-400 mt-1">•</span>
                       <span>{tip}</span>
                     </li>
@@ -900,49 +871,49 @@ const EducationalStep = () => {
         </div>
       )}
 
-      {/* Plano de Emergência */}
+      {/* Plano de Emergência - MOBILE OPTIMIZED */}
       {visibleSections >= 4 && (
         <div 
-          className="bg-red-900/30 border border-red-500 rounded-lg p-6"
+          className="bg-red-900/30 border border-red-500 rounded-lg p-6 mobile-emergency"
           style={{ animation: 'slideInUp 0.5s ease-out' }}
         >
-          <h4 className="font-bold text-red-400 mb-4 text-lg flex items-center gap-2">
+          <h4 className="font-bold text-red-400 mb-4 mobile-emergency-title flex items-center gap-2">
             <AlertTriangle className="w-6 h-6" />
             {emergencyPlan.title}
           </h4>
           
-          <div className="grid grid-cols-1 md:grid-cols-5 gap-4">
+          <div className="grid grid-cols-1 md:grid-cols-5 gap-4 mobile-emergency-grid">
             {emergencyPlan.steps.map((step, idx) => (
               <div
                 key={step.step}
-                className="bg-red-800/20 rounded-lg p-4 text-center relative"
+                className="bg-red-800/20 rounded-lg p-4 text-center relative mobile-emergency-step"
                 style={{ animation: `slideInUp 0.5s ease-out ${idx * 0.3}s both` }}
               >
-                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center text-sm font-bold">
+                <div className="absolute -top-3 left-1/2 transform -translate-x-1/2 w-6 h-6 bg-red-500 text-white rounded-full flex items-center justify-center mobile-emergency-number font-bold">
                   {step.step}
                 </div>
-                <h5 className="font-bold text-red-300 mt-2 mb-2 text-sm">{step.action}</h5>
-                <p className="text-red-200 text-xs">{step.description}</p>
+                <h5 className="font-bold text-red-300 mt-2 mb-2 mobile-emergency-action">{step.action}</h5>
+                <p className="text-red-200 mobile-emergency-description">{step.description}</p>
               </div>
             ))}
           </div>
         </div>
       )}
 
-      {/* Depoimento */}
+      {/* Depoimento - MOBILE OPTIMIZED */}
       {visibleSections >= 5 && (
         <div 
-          className="bg-green-900/20 border border-green-500 rounded-lg p-6 text-center"
+          className="bg-green-900/20 border border-green-500 rounded-lg p-6 text-center mobile-testimonial"
           style={{ animation: 'fadeInScale 0.5s ease-out' }}
         >
-          <h4 className="font-bold text-green-400 mb-3">💬 DEPOIMENTO REAL</h4>
-          <blockquote className="text-green-200 italic mb-3">
+          <h4 className="font-bold text-green-400 mb-3 mobile-testimonial-title">💬 DEPOIMENTO REAL</h4>
+          <blockquote className="text-green-200 italic mb-3 mobile-testimonial-quote">
             "Não sabia que meu filho estava sendo aliciado até ver essa simulação. Consegui conversar com ele a tempo e descobrimos que ele havia enviado fotos para um 'amigo' online."
           </blockquote>
-          <cite className="text-green-300 font-semibold">
+          <cite className="text-green-300 font-semibold mobile-testimonial-author">
             — Carla M., Mãe de 2 filhos • São Paulo, SP
           </cite>
-          <div className="flex justify-center mt-2">
+          <div className="flex justify-center mt-2 mobile-testimonial-stars">
             {[...Array(5)].map((_, i) => (
               <span key={i} className="text-yellow-400">⭐</span>
             ))}
@@ -964,13 +935,13 @@ const enviarEvento = (nome_evento, propriedades = {}) => {
   }
 }
 
-// Componente Principal
+// Componente Principal - MOBILE OPTIMIZED
 export default function QuizStep() {
   const params = useParams()
   const router = useRouter()
   const step = Number.parseInt(params.step as string)
   const [isLoaded, setIsLoaded] = useState(false)
-  const [canProceed, setCanProceed] = useState(step === 4) // Etapa 4 pode avançar imediatamente
+  const [canProceed, setCanProceed] = useState(step === 4)
   const [sessionId] = useState(() => {
     if (typeof window !== 'undefined') {
       return window.sessionStorage.getItem('quiz_session') || 'anonymous'
@@ -981,15 +952,13 @@ export default function QuizStep() {
   const currentStep = quizData.steps[step - 1]
   const progress = (step / 4) * 100
 
-  // Função para receber o estado dos componentes filhos
   const handleCanProceed = useCallback((value) => {
     setCanProceed(value)
   }, [])
 
   useEffect(() => {
-    const timer = setTimeout(() => setIsLoaded(true), 300)
+    const timer = setTimeout(() => setIsLoaded(true), 200) // MOBILE: mais rápido
 
-    // Analytics
     enviarEvento('visualizou_etapa_quiz', {
       numero_etapa: step,
       pergunta: currentStep?.question || `Etapa ${step}`,
@@ -1006,7 +975,6 @@ export default function QuizStep() {
       session_id: sessionId
     });
 
-    // Preservar UTMs
     const currentUrl = new URL(window.location.href);
     let utmString = '';
 
@@ -1064,15 +1032,15 @@ export default function QuizStep() {
 
   return (
     <>
-      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4">
-        <div className="max-w-4xl mx-auto">
+      <div className="min-h-screen bg-gradient-to-br from-black via-gray-900 to-black p-4 mobile-main">
+        <div className="max-w-4xl mx-auto mobile-container">
           
-          {/* Header com progresso */}
-          <div className="mb-8">
-            <div className="flex items-center justify-between mb-4">
+          {/* Header com progresso - MOBILE OPTIMIZED */}
+          <div className="mb-8 mobile-header">
+            <div className="flex items-center justify-between mb-4 mobile-nav">
               <button
                 onClick={handleBack}
-                className="text-white hover:bg-white/20 border border-white/20 transition-all hover:scale-105 px-4 py-2 rounded-lg flex items-center gap-2"
+                className="text-white hover:bg-white/20 border border-white/20 transition-all hover:scale-105 px-4 py-2 rounded-lg flex items-center gap-2 mobile-back-btn"
               >
                 <ArrowLeft className="w-4 h-4" />
                 Voltar
@@ -1080,67 +1048,67 @@ export default function QuizStep() {
 
               {step <= 3 && (
                 <div 
-                  className="flex items-center gap-2 text-white text-sm bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm"
+                  className="flex items-center gap-2 text-white mobile-watch-indicator bg-white/10 px-3 py-1 rounded-full backdrop-blur-sm"
                   style={{ animation: 'pulse-soft 2s infinite' }}
                 >
                   <Eye className="w-4 h-4" />
-                  <span>Observar com atenção</span>
+                  <span className="mobile-watch-text">Observar com atenção</span>
                 </div>
               )}
             </div>
 
-            <div className="bg-white/20 rounded-full p-1 mb-2">
+            <div className="bg-white/20 rounded-full p-1 mb-2 mobile-progress-container">
               <div
-                className="h-3 bg-gradient-to-r from-red-500 to-orange-500 rounded-full transition-all duration-1000 ease-out"
+                className="h-3 bg-gradient-to-r from-red-500 to-orange-500 rounded-full transition-all duration-1000 ease-out mobile-progress-bar"
                 style={{ width: `${progress}%` }}
               />
             </div>
 
-            <div className="flex justify-between items-center">
-              <p className="text-white text-sm">
+            <div className="flex justify-between items-center mobile-progress-info">
+              <p className="text-white mobile-progress-text">
                 Etapa {step} de 4 • {Math.round(progress)}% concluído
               </p>
             </div>
           </div>
 
-          {/* Card Principal */}
+          {/* Card Principal - MOBILE OPTIMIZED */}
           <div 
-            className="quiz-card bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-lg border-red-500/30 shadow-2xl border-2 overflow-hidden rounded-xl"
+            className="quiz-card mobile-card bg-gradient-to-br from-gray-900/95 to-black/95 backdrop-blur-lg border-red-500/30 shadow-2xl border-2 overflow-hidden rounded-xl"
             style={{
               opacity: isLoaded ? 1 : 0,
               transform: isLoaded ? 'translateY(0)' : 'translateY(20px)',
               transition: 'all 0.6s ease-out'
             }}
           >
-            <div className="p-6 sm:p-8">
+            <div className="p-6 sm:p-8 mobile-card-content">
               
               <h2 
-                className="text-2xl sm:text-3xl font-bold text-white mb-4 text-center leading-tight"
+                className="mobile-question font-bold text-white mb-4 text-center leading-tight"
                 style={step <= 3 ? { animation: 'glow-red 3s infinite' } : {}}
               >
                 {currentStep.question}
               </h2>
 
               {currentStep.description && (
-                <p className="text-gray-300 text-center mb-8 text-base sm:text-lg">
+                <p className="text-gray-300 text-center mb-8 mobile-description">
                   {currentStep.description}
                 </p>
               )}
 
               {currentStep.subtext && (
                 <p 
-                  className="text-orange-200 text-center mb-6 text-sm font-medium italic"
+                  className="text-orange-200 text-center mb-6 mobile-subtext font-medium italic"
                   style={{ animation: 'pulse-orange 2s infinite' }}
                 >
                   {currentStep.subtext}
                 </p>
               )}
 
-              {/* Badge de simulação */}
+              {/* Badge de simulação - MOBILE OPTIMIZED */}
               {currentStep.badge && (
-                <div className="text-center mb-6">
+                <div className="text-center mb-6 mobile-badge-container">
                   <span 
-                    className="inline-block bg-gradient-to-r from-red-600 to-orange-600 text-white text-xs font-bold px-3 py-1 rounded-full uppercase tracking-wide"
+                    className="inline-block bg-gradient-to-r from-red-600 to-orange-600 text-white mobile-badge font-bold px-3 py-1 rounded-full uppercase tracking-wide"
                     style={{ animation: 'pulse-badge 3s infinite' }}
                   >
                     {currentStep.badge}
@@ -1148,45 +1116,44 @@ export default function QuizStep() {
                 </div>
               )}
 
-              {/* Renderizar componentes específicos com callback */}
+              {/* Renderizar componentes específicos - MOBILE OPTIMIZED */}
               {step === 1 && <ChatGamingStep onCanProceed={handleCanProceed} />}
               {step === 2 && <ChatPrivateStep onCanProceed={handleCanProceed} />}
               {step === 3 && <ChatDirectStep onCanProceed={handleCanProceed} />}
               {step === 4 && <EducationalStep />}
 
-              {/* CTA Button com controle */}
-              <div className="mt-8 text-center">
+              {/* CTA Button - MOBILE OPTIMIZED */}
+              <div className="mt-8 text-center mobile-cta-container">
                 <button
                   onClick={handleNext}
                   disabled={!canProceed}
-                  className={`cta-button font-bold py-4 px-8 rounded-full shadow-lg w-full sm:w-auto text-base relative overflow-hidden transition-all duration-300 ${
+                  className={`cta-button mobile-cta font-bold py-4 px-8 rounded-full shadow-lg w-full sm:w-auto relative overflow-hidden transition-all duration-300 ${
                     canProceed 
                       ? 'bg-gradient-to-r from-red-600 to-orange-600 hover:from-red-700 hover:to-orange-700 text-white hover:scale-105 cursor-pointer' 
                       : 'bg-gray-600 text-gray-400 cursor-not-allowed opacity-70'
                   }`}
                 >
-                  <span className="relative z-10 flex items-center justify-center gap-2">
-                    {step === 4 ? "VER SOLUÇÃO COMPLETA" : "PRÓXIMA ETAPA"}
+                  <span className="relative z-10 flex items-center justify-center gap-2 mobile-cta-content">
+                    {step === 4 ? "VER SOLUÇÃO COMPLETA" : step === 2 ? "PRÓXIMA FASE (2/3)" : step === 3 ? "PRÓXIMA FASE (3/3)" : "PRÓXIMA ETAPA"}
                     <ArrowRight className="w-5 h-5" />
                   </span>
                 </button>
                 
-                {/* Indicador quando botão está desabilitado */}
                 {!canProceed && step <= 3 && (
-                  <p className="text-gray-400 text-xs mt-2">
+                  <p className="text-gray-400 mobile-wait-text mt-2">
                     ⏳ Aguarde a simulação terminar para continuar
                   </p>
                 )}
               </div>
 
-              {/* Aviso de conteúdo */}
+              {/* Aviso de conteúdo - MOBILE OPTIMIZED */}
               {step <= 3 && (
-                <div className="mt-6 text-center">
+                <div className="mt-6 text-center mobile-warning-container">
                   <div 
-                    className="text-amber-300 bg-amber-900/30 p-4 rounded-lg border border-amber-600 inline-block"
+                    className="text-amber-300 bg-amber-900/30 p-4 rounded-lg border border-amber-600 inline-block mobile-warning"
                     style={{ animation: 'pulse-warning 3s infinite' }}
                   >
-                    <p className="font-medium text-sm">
+                    <p className="font-medium mobile-warning-text">
                       ⚠️ <strong>AVISO:</strong> Conteúdo educacional sobre perigos reais na internet. Pode ser perturbador.
                     </p>
                   </div>
@@ -1196,17 +1163,17 @@ export default function QuizStep() {
             </div>
           </div>
 
-          {/* Prova Social */}
+          {/* Prova Social - MOBILE OPTIMIZED */}
           {step > 1 && (
-            <div className="text-center space-y-3 mt-6">
+            <div className="text-center space-y-3 mt-6 mobile-social-proof">
               <p 
-                className="text-white text-xs sm:text-sm bg-white/10 px-4 py-2 rounded-full inline-block backdrop-blur-sm"
+                className="text-white mobile-social-text bg-white/10 px-4 py-2 rounded-full inline-block backdrop-blur-sm"
                 style={{ animation: 'pulse-soft 4s infinite' }}
               >
                 👥 3.247 pais já viram esta simulação
               </p>
               <p 
-                className="text-green-400 text-xs sm:text-sm font-semibold bg-green-900/20 px-4 py-2 rounded-full inline-block backdrop-blur-sm"
+                className="text-green-400 mobile-social-text font-semibold bg-green-900/20 px-4 py-2 rounded-full inline-block backdrop-blur-sm"
                 style={{ animation: 'glow-green-soft 3s infinite' }}
               >
                 ✅ 91% descobriu comportamentos suspeitos no filho
@@ -1216,8 +1183,361 @@ export default function QuizStep() {
         </div>
       </div>
 
-      {/* CSS Animations */}
+      {/* CSS Animations + MOBILE OPTIMIZATIONS */}
       <style jsx global>{`
+        /* === MOBILE-FIRST OPTIMIZATIONS === */
+        @media (max-width: 767px) {
+          
+          /* Headers simplificados */
+          .mobile-header .mobile-nav {
+            align-items: center;
+          }
+          
+          .mobile-back-btn {
+            font-size: 14px;
+            padding: 8px 12px;
+          }
+          
+          .mobile-watch-indicator {
+            font-size: 12px;
+            padding: 6px 12px;
+          }
+          
+          .mobile-watch-text {
+            display: none;
+          }
+          
+          /* Card principal */
+          .mobile-card {
+            margin: 0 8px;
+          }
+          
+          .mobile-card-content {
+            padding: 20px 16px;
+          }
+          
+          /* Títulos e textos */
+          .mobile-question {
+            font-size: 20px;
+            line-height: 1.3;
+            margin-bottom: 16px;
+          }
+          
+          .mobile-description {
+            font-size: 16px;
+            margin-bottom: 24px;
+          }
+          
+          .mobile-subtext {
+            font-size: 14px;
+            margin-bottom: 20px;
+          }
+          
+          .mobile-badge {
+            font-size: 10px;
+            padding: 6px 12px;
+          }
+          
+          /* Chat components */
+          .mobile-discord {
+            margin: 0 -8px;
+          }
+          
+          .mobile-header {
+            padding: 12px 16px;
+          }
+          
+          .mobile-title {
+            font-size: 16px;
+          }
+          
+          .mobile-online {
+            font-size: 12px;
+          }
+          
+          .mobile-danger {
+            font-size: 10px;
+            margin-top: 2px;
+          }
+          
+          .mobile-chat-area {
+            height: 300px;
+            padding: 12px;
+          }
+          
+          /* Mensagens */
+          .mobile-message {
+            padding: 12px;
+            margin-bottom: 12px;
+          }
+          
+          .mobile-avatar {
+            width: 32px;
+            height: 32px;
+            font-size: 14px;
+          }
+          
+          .mobile-username {
+            font-size: 14px;
+          }
+          
+          .mobile-time {
+            font-size: 10px;
+          }
+          
+          .mobile-status {
+            font-size: 10px;
+          }
+          
+          .mobile-text {
+            font-size: 15px;
+            line-height: 1.4;
+          }
+          
+          .mobile-danger-icon {
+            font-size: 12px;
+          }
+          
+          /* Input */
+          .mobile-input {
+            padding: 12px 16px;
+          }
+          
+          .mobile-input-text {
+            font-size: 14px;
+          }
+          
+          .mobile-input-icons span {
+            font-size: 16px;
+          }
+          
+          /* Alertas */
+          .mobile-alerts {
+            margin: 0 -8px;
+          }
+          
+          .mobile-alert {
+            font-size: 13px;
+            padding: 10px 12px;
+            margin-bottom: 8px;
+          }
+          
+          /* Explicações */
+          .mobile-explanation-text {
+            font-size: 14px;
+          }
+          
+          .mobile-progress-text {
+            font-size: 12px;
+          }
+          
+          .mobile-progress-bar {
+            width: 200px;
+          }
+          
+          /* CTA */
+          .mobile-cta {
+            font-size: 16px;
+            padding: 16px 24px;
+            width: 100%;
+          }
+          
+          .mobile-wait-text {
+            font-size: 11px;
+          }
+          
+          /* Warning */
+          .mobile-warning {
+            padding: 12px 16px;
+          }
+          
+          .mobile-warning-text {
+            font-size: 12px;
+          }
+          
+          /* Social proof */
+          .mobile-social-text {
+            font-size: 12px;
+            padding: 8px 16px;
+          }
+          
+          /* Educational components */
+          .mobile-educational {
+            padding: 0 8px;
+          }
+          
+          .mobile-reveal {
+            padding: 20px 16px;
+          }
+          
+          .mobile-reveal-title {
+            font-size: 18px;
+            margin-bottom: 12px;
+          }
+          
+          .mobile-reveal-text {
+            font-size: 14px;
+          }
+          
+          .mobile-section-title {
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+          
+          .mobile-dangers-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          
+          .mobile-danger-card {
+            padding: 16px;
+          }
+          
+          .mobile-danger-icon {
+            font-size: 24px;
+            margin-bottom: 8px;
+          }
+          
+          .mobile-danger-title {
+            font-size: 14px;
+            margin-bottom: 8px;
+          }
+          
+          .mobile-danger-description {
+            font-size: 12px;
+            margin-bottom: 12px;
+          }
+          
+          .mobile-danger-detail {
+            font-size: 11px;
+          }
+          
+          /* Warnings */
+          .mobile-warnings {
+            padding: 20px 16px;
+          }
+          
+          .mobile-warnings-title {
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+          
+          .mobile-warnings-grid {
+            grid-template-columns: 1fr;
+            gap: 20px;
+          }
+          
+          .mobile-warning-category-title {
+            font-size: 12px;
+          }
+          
+          .mobile-warning-sign {
+            font-size: 12px;
+          }
+          
+          /* Talk */
+          .mobile-talk {
+            padding: 20px 16px;
+          }
+          
+          .mobile-talk-title {
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+          
+          .mobile-talk-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          
+          .mobile-talk-stage {
+            padding: 16px;
+          }
+          
+          .mobile-talk-stage-title {
+            font-size: 14px;
+            margin-bottom: 12px;
+          }
+          
+          .mobile-talk-tip {
+            font-size: 12px;
+          }
+          
+          /* Emergency */
+          .mobile-emergency {
+            padding: 20px 16px;
+          }
+          
+          .mobile-emergency-title {
+            font-size: 16px;
+            margin-bottom: 16px;
+          }
+          
+          .mobile-emergency-grid {
+            grid-template-columns: 1fr;
+            gap: 16px;
+          }
+          
+          .mobile-emergency-step {
+            padding: 16px 12px;
+          }
+          
+          .mobile-emergency-number {
+            font-size: 12px;
+            width: 20px;
+            height: 20px;
+          }
+          
+          .mobile-emergency-action {
+            font-size: 12px;
+            margin: 8px 0;
+          }
+          
+          .mobile-emergency-description {
+            font-size: 10px;
+          }
+          
+          /* Testimonial */
+          .mobile-testimonial {
+            padding: 20px 16px;
+          }
+          
+          .mobile-testimonial-title {
+            font-size: 16px;
+            margin-bottom: 12px;
+          }
+          
+          .mobile-testimonial-quote {
+            font-size: 14px;
+            margin-bottom: 12px;
+          }
+          
+          .mobile-testimonial-author {
+            font-size: 12px;
+          }
+          
+          .mobile-testimonial-stars {
+            margin-top: 8px;
+          }
+          
+          /* Typing indicator */
+          .mobile-typing-text {
+            font-size: 12px;
+          }
+          
+          /* Progress info */
+          .mobile-progress-text {
+            font-size: 12px;
+          }
+          
+          /* Danger pulse */
+          .mobile-danger-pulse {
+            width: 8px;
+            height: 8px;
+          }
+        }
+
+        /* === EXISTING ANIMATIONS === */
         @keyframes typing-bounce {
           0%, 60%, 100% { transform: translateY(0); }
           30% { transform: translateY(-10px); }

@@ -1,4 +1,5 @@
 // === QUIZ DATA ADAPTADO NÍVEL 3 - SISTEMA DINÂMICO E INTELIGENTE ===
+// === OTIMIZADO PARA MOBILE-FIRST ===
 
 // === SISTEMA DE PERSONALIZAÇÃO AVANÇADA ===
 function getUserAnswer(questionId: string) {
@@ -40,8 +41,8 @@ export const characterProfiles = {
             age: "adulto_predador"
         },
         behaviors: {
-            responseTime: { min: 800, max: 2400 },
-            messageLength: { preferred: "medium", max: 120 },
+            responseTime: { min: 600, max: 1800 }, // MOBILE: 25% mais rápido
+            messageLength: { preferred: "short", max: 80 }, // MOBILE: mais curto
             emojiUsage: "minimal",
             spellingErrors: 0.02,
             manipulationPatterns: [
@@ -66,7 +67,7 @@ export const characterProfiles = {
             vulnerability: 0.8
         },
         behaviors: {
-            responseTime: { min: 2000, max: 5000 },
+            responseTime: { min: 1500, max: 3500 }, // MOBILE: mais rápido
             spellingErrors: 0.12,
             emojiUsage: "high",
             questionPatterns: ["por quê?", "não entendi", "tá", "ok", "sério?"],
@@ -84,7 +85,7 @@ export const characterProfiles = {
             behavior: "toxic_gamer"
         },
         behaviors: {
-            responseTime: { min: 200, max: 800 },
+            responseTime: { min: 150, max: 600 }, // MOBILE: mais rápido
             emojiUsage: "aggressive",
             spellingErrors: 0.15,
             toxicPatterns: ["ridicularizar", "diminuir", "atacar_habilidade"]
@@ -101,21 +102,21 @@ export const characterProfiles = {
             role: "accomplice_predator"
         },
         behaviors: {
-            responseTime: { min: 1000, max: 3000 },
+            responseTime: { min: 800, max: 2200 }, // MOBILE: mais rápido
             manipulationRole: "normalizador",
             supportsPredator: true
         }
     }
 }
 
-// === SISTEMA DE VARIAÇÕES DINÂMICAS - NÍVEL 3 ===
+// === SISTEMA DE VARIAÇÕES DINÂMICAS - MOBILE OPTIMIZED ===
 export const messageVariations = {
     predator_approach: [
-        "oi {victim}! bem vinda! vem no privado q eu te ensino uns macetes top",
-        "eae {victim}! curte o jogo? tenho umas dicas massa, chama no pv", 
-        "opa {victim}! vi que vc é nova, posso te ajudar com umas técnicas secretas",
-        "salve {victim}! sou veterano aqui, te ensino uns truques se quiser",
-        "oi {victim}! bem vinda ao servidor! vem no privado que explico melhor o jogo"
+        "oi! bem vinda! vem no pvt q ensino dicas top",
+        "eae! curte o jogo? tenho macetes, chama pv", 
+        "opa! vi q vc é nova, posso ajudar",
+        "salve! sou veterano, te ensino truques",
+        "oi! bem vinda! vem no privado q explico melhor"
     ],
 
     casual_gaming: [
@@ -144,16 +145,16 @@ export const messageVariations = {
 
     age_request: [
         "qnts anos vc tem?",
-        "qual sua idade? só curiosidade", 
-        "vc é mais nova né? quantos anos?",
-        "me fala tua idade, é pra saber se posso te ensinar certas coisas",
+        "qual sua idade?", 
+        "vc é novinha né? quantos anos?",
+        "me fala tua idade, é pra saber se posso te ensinar",
         "que idade vc tem? parece ser novinha"
     ],
 
     photo_request: [
-        "manda uma foto sua pra gnt te conhecer melhor",
-        "todos aqui mandaram foto, manda a sua também",
-        "que tal uma selfie? queremos ver quem vc é",
+        "manda uma foto pra gnt te conhecer",
+        "todos mandaram foto, manda a sua",
+        "selfie aí pra gnt ver quem vc é",
         "foto sua aí, só pro grupo te conhecer",
         "manda uma pic sua, todo mundo já mandou"
     ],
@@ -167,23 +168,23 @@ export const messageVariations = {
     ],
 
     credential_theft: [
-        "se vc me passar seu login e senha eu libero tudo pra vc",
+        "se vc me passar login e senha eu libero tudo",
         "me dá tua conta que eu upo ela pra vc",
         "passa tua senha que coloco uns skins grátis",
         "login e senha que eu faço tudo pra vc",
-        "me empresta tua conta que eu te ajudo a subir de rank"
+        "me empresta tua conta que te ajudo a subir"
     ],
 
     isolation_demand: [
         "não conta pra ninguém q a gnt se fala ok?",
         "isso fica só entre nós, não fala pra ninguém",
-        "segredo nosso, não pode contar pra seus pais",
+        "segredo nosso, não pode contar pros seus pais",
         "promete que não vai falar isso pra ninguém?",
         "nossa conversa é privada, ninguém pode saber"
     ],
 
     emotional_manipulation: [
-        "pq eles não vão entender. só a gnt aqui te entende mesmo",
+        "pq eles não vão entender. só a gnt te entende",
         "seus pais não entendem você como eu entendo",
         "só eu realmente me importo com você",
         "ninguém te entende como eu entendo",
@@ -207,11 +208,11 @@ export const messageVariations = {
     ],
 
     final_extortion: [
-        "melhor cooperar, senão vou enviar aquelas fotos pra seus pais",
-        "se não fizer o que eu quero, todo mundo vai ver suas fotos",
+        "melhor cooperar, senão vou enviar fotos pros seus pais",
+        "se não fizer o que eu quero, todo mundo vai ver",
         "coopera ou sua família vai saber de tudo",
-        "faz o que eu tô pedindo ou vou espalhar tudo sobre você",
-        "você escolhe: coopera ou eu conto tudo pros seus pais"
+        "faz o que eu tô pedindo ou espalho tudo sobre você",
+        "você escolhe: coopera ou conto tudo pros seus pais"
     ]
 }
 
@@ -269,15 +270,15 @@ export const generateDynamicMessage = (messageType: string, context: any = {}) =
     return personalizedMessage
 }
 
-// === DADOS DOS CHATS DINÂMICOS - NÍVEL 3 ===
+// === DADOS DOS CHATS DINÂMICOS - MOBILE OPTIMIZED ===
 export const chatGamingData = {
-    serverName: "FortFriends Brasil",
+    serverName: "", // MOBILE: removido para simplificar
     icon: "🎮",
     channelInfo: {
-        name: "geral-iniciantes",
-        topic: "Canal para jogadores iniciantes • Sejam respeitosos",
-        memberCount: 1247,
-        onlineCount: 247
+        name: "💬 Chat Gaming", // MOBILE: mais direto
+        topic: "", // MOBILE: removido
+        memberCount: 6, // MOBILE: simplificado
+        onlineCount: 6 // MOBILE: simplificado
     },
     
     messages: [
@@ -290,8 +291,8 @@ export const chatGamingData = {
             type: "normal",
             avatar: "🎮",
             timing: {
-                delay: 500,
-                typingDuration: 1200
+                delay: 400, // MOBILE: mais rápido
+                typingDuration: 1000 // MOBILE: mais rápido
             }
         },
         {
@@ -303,8 +304,8 @@ export const chatGamingData = {
             type: "normal",
             avatar: "👧",
             timing: {
-                delay: 1200,
-                typingDuration: 1500
+                delay: 900, // MOBILE: mais rápido
+                typingDuration: 1200 // MOBILE: mais rápido
             }
         },
         {
@@ -316,8 +317,8 @@ export const chatGamingData = {
             type: "bullying",
             avatar: "😈",
             timing: {
-                delay: 1900,
-                typingDuration: 800
+                delay: 1400, // MOBILE: mais rápido
+                typingDuration: 600 // MOBILE: mais rápido
             }
         },
         {
@@ -329,8 +330,8 @@ export const chatGamingData = {
             type: "normal", 
             avatar: "✨",
             timing: {
-                delay: 2600,
-                typingDuration: 2000
+                delay: 1900, // MOBILE: mais rápido
+                typingDuration: 1500 // MOBILE: mais rápido
             }
         },
         {
@@ -342,8 +343,8 @@ export const chatGamingData = {
             type: "alert",
             avatar: "⚠️",
             timing: {
-                delay: 3300,
-                typingDuration: 2500
+                delay: 2400, // MOBILE: mais rápido
+                typingDuration: 2000 // MOBILE: mais rápido
             },
             dangerLevel: "high",
             manipulationTactics: ["ofertar_ajuda", "isolar_vitima"]
@@ -355,31 +356,31 @@ export const chatGamingData = {
             id: 1,
             text: "🚨 PREDADOR identificando criança nova",
             severity: "critical",
-            timing: { delay: 4000 }
+            timing: { delay: 3000 } // MOBILE: mais rápido
         },
         {
             id: 2, 
             text: "🚨 TENTATIVA DE ISOLAMENTO (convite para privado)",
             severity: "critical",
-            timing: { delay: 4300 }
+            timing: { delay: 3200 } // MOBILE: mais rápido
         },
         {
             id: 3,
             text: "🚨 PROMESSAS tentadoras para ganhar confiança", 
             severity: "high",
-            timing: { delay: 4600 }
+            timing: { delay: 3400 } // MOBILE: mais rápido
         }
     ]
 }
 
 export const chatPrivateData = {
-    channelName: "amigos-especiais",
+    channelName: "🔒 Chat Privado", // MOBILE: mais direto
     icon: "🔒",
     channelInfo: {
-        name: "amigos-especiais",
+        name: "🔒 Chat Privado", // MOBILE: simplificado
         type: "private_group",
         memberCount: 4,
-        description: "Grupo privado para amigos próximos"
+        description: "" // MOBILE: removido
     },
 
     messages: [
@@ -390,7 +391,7 @@ export const chatPrivateData = {
             text: "e aí, conseguiu fazer aquelas missões?",
             time: "15:01",
             type: "normal",
-            timing: { delay: 500, typingDuration: 1500 }
+            timing: { delay: 400, typingDuration: 1200 } // MOBILE: mais rápido
         },
         {
             id: 2,
@@ -399,7 +400,7 @@ export const chatPrivateData = {
             textGenerator: () => generateDynamicMessage("age_request"),
             time: "15:02",
             type: "alert",
-            timing: { delay: 1200, typingDuration: 1000 },
+            timing: { delay: 900, typingDuration: 800 }, // MOBILE: mais rápido
             dangerLevel: "critical",
             manipulationTactics: ["coletar_informacoes_pessoais"]
         },
@@ -410,7 +411,7 @@ export const chatPrivateData = {
             text: "11 pq?",
             time: "15:03",
             type: "normal",
-            timing: { delay: 1900, typingDuration: 800 }
+            timing: { delay: 1400, typingDuration: 600 } // MOBILE: mais rápido
         },
         {
             id: 4,
@@ -419,7 +420,7 @@ export const chatPrivateData = {
             textGenerator: () => generateDynamicMessage("photo_request"),
             time: "15:04",
             type: "alert", 
-            timing: { delay: 2600, typingDuration: 2000 },
+            timing: { delay: 1900, typingDuration: 1500 }, // MOBILE: mais rápido
             dangerLevel: "critical",
             manipulationTactics: ["exploração_sexual"]
         },
@@ -430,7 +431,7 @@ export const chatPrivateData = {
             textGenerator: () => generateDynamicMessage("normalization"),
             time: "15:05",
             type: "alert",
-            timing: { delay: 3300, typingDuration: 1500 },
+            timing: { delay: 2400, typingDuration: 1200 }, // MOBILE: mais rápido
             dangerLevel: "high",
             manipulationTactics: ["normalizar_comportamento"]
         },
@@ -441,7 +442,7 @@ export const chatPrivateData = {
             text: "aqui tem uns skins gratis: bit.ly/sk1ns-gr4t1s",
             time: "15:06", 
             type: "alert",
-            timing: { delay: 4000, typingDuration: 1800 },
+            timing: { delay: 2900, typingDuration: 1400 }, // MOBILE: mais rápido
             dangerLevel: "high",
             manipulationTactics: ["links_maliciosos"]
         },
@@ -452,7 +453,7 @@ export const chatPrivateData = {
             textGenerator: () => generateDynamicMessage("credential_theft"),
             time: "15:07",
             type: "alert",
-            timing: { delay: 4700, typingDuration: 2200 },
+            timing: { delay: 3400, typingDuration: 1800 }, // MOBILE: mais rápido
             dangerLevel: "critical", 
             manipulationTactics: ["roubo_credenciais"]
         }
@@ -463,37 +464,37 @@ export const chatPrivateData = {
             id: 1,
             text: "🚨 SOLICITAÇÃO DE IDADE (para menores)",
             severity: "critical",
-            timing: { delay: 5000 }
+            timing: { delay: 3600 } // MOBILE: mais rápido
         },
         {
             id: 2,
             text: "🚨 PEDIDO DE FOTOS (exploração sexual)",
             severity: "critical", 
-            timing: { delay: 5300 }
+            timing: { delay: 3800 } // MOBILE: mais rápido
         },
         {
             id: 3,
             text: "🚨 PRESSÃO SOCIAL (normalizar comportamento)",
             severity: "high",
-            timing: { delay: 5600 }
+            timing: { delay: 4000 } // MOBILE: mais rápido
         },
         {
             id: 4,
             text: "🚨 LINKS SUSPEITOS (malware/roubo)",
             severity: "high",
-            timing: { delay: 5900 }
+            timing: { delay: 4200 } // MOBILE: mais rápido
         },
         {
             id: 5,
             text: "🚨 ROUBO DE CREDENCIAIS (acesso à conta)",
             severity: "critical",
-            timing: { delay: 6200 }
+            timing: { delay: 4400 } // MOBILE: mais rápido
         }
     ]
 }
 
 export const chatDirectData = {
-    userName: "M4st3rHelp",
+    userName: "⚠️ M4st3rHelp", // MOBILE: mais impactante
     icon: "💬", 
     chatInfo: {
         type: "direct_message",
@@ -509,7 +510,7 @@ export const chatDirectData = {
             text: "ei, vc tá online",
             time: "20:15",
             type: "normal",
-            timing: { delay: 500, typingDuration: 1000 }
+            timing: { delay: 400, typingDuration: 800 } // MOBILE: mais rápido
         },
         {
             id: 2,
@@ -518,7 +519,7 @@ export const chatDirectData = {
             textGenerator: () => generateDynamicMessage("isolation_demand"),
             time: "20:16",
             type: "alert",
-            timing: { delay: 1300, typingDuration: 2000 },
+            timing: { delay: 1000, typingDuration: 1500 }, // MOBILE: mais rápido
             dangerLevel: "critical",
             manipulationTactics: ["isolamento", "segredo"]
         },
@@ -529,7 +530,7 @@ export const chatDirectData = {
             text: "por quê?",
             time: "20:17", 
             type: "normal",
-            timing: { delay: 2100, typingDuration: 1200 }
+            timing: { delay: 1600, typingDuration: 900 } // MOBILE: mais rápido
         },
         {
             id: 4,
@@ -538,7 +539,7 @@ export const chatDirectData = {
             textGenerator: () => generateDynamicMessage("emotional_manipulation"),
             time: "20:18",
             type: "alert",
-            timing: { delay: 2900, typingDuration: 2500 },
+            timing: { delay: 2200, typingDuration: 2000 }, // MOBILE: mais rápido
             dangerLevel: "critical",
             manipulationTactics: ["manipulacao_emocional"]
         },
@@ -549,7 +550,7 @@ export const chatDirectData = {
             textGenerator: () => generateDynamicMessage("threats_escalation"),
             time: "20:19",
             type: "alert", 
-            timing: { delay: 3700, typingDuration: 1800 },
+            timing: { delay: 2800, typingDuration: 1400 }, // MOBILE: mais rápido
             dangerLevel: "critical",
             manipulationTactics: ["ameaca_emocional"]
         },
@@ -563,7 +564,7 @@ export const chatDirectData = {
             }),
             time: "20:20",
             type: "alert",
-            timing: { delay: 4500, typingDuration: 2800 },
+            timing: { delay: 3400, typingDuration: 2200 }, // MOBILE: mais rápido
             dangerLevel: "extreme",
             manipulationTactics: ["doxxing", "intimidacao"]
         },
@@ -574,7 +575,7 @@ export const chatDirectData = {
             textGenerator: () => generateDynamicMessage("final_extortion"),
             time: "20:21", 
             type: "alert",
-            timing: { delay: 5300, typingDuration: 2500 },
+            timing: { delay: 4000, typingDuration: 2000 }, // MOBILE: mais rápido
             dangerLevel: "extreme",
             manipulationTactics: ["extorsao", "chantagem"]
         }
@@ -585,36 +586,36 @@ export const chatDirectData = {
             id: 1,
             text: "🚨 ISOLAMENTO (não contar para ninguém)",
             severity: "critical",
-            timing: { delay: 6000 }
+            timing: { delay: 4500 } // MOBILE: mais rápido
         },
         {
             id: 2,
             text: "🚨 CHANTAGEM EMOCIONAL (exclusão)",
             severity: "critical",
-            timing: { delay: 6300 }
+            timing: { delay: 4700 } // MOBILE: mais rápido
         },
         {
             id: 3,
             text: "🚨 DOXXING (exposição de dados reais)",
             severity: "extreme",
-            timing: { delay: 6600 }
+            timing: { delay: 4900 } // MOBILE: mais rápido
         },
         {
             id: 4,
             text: "🚨 EXTORSÃO (ameaça de divulgar)",
             severity: "extreme", 
-            timing: { delay: 6900 }
+            timing: { delay: 5100 } // MOBILE: mais rápido
         },
         {
             id: 5,
             text: "🚨 MANIPULAÇÃO EXTREMA (controle total)",
             severity: "extreme",
-            timing: { delay: 7200 }
+            timing: { delay: 5300 } // MOBILE: mais rápido
         }
     ]
 }
 
-// === QUIZ STEPS MELHORADOS - NÍVEL 3 ===
+// === QUIZ STEPS MELHORADOS - MOBILE OPTIMIZED ===
 export const quizSteps = [
     {
         id: 1,
@@ -627,7 +628,8 @@ export const quizSteps = [
             chatType: "gaming",
             badge: "SIMULAÇÃO REALISTA",
             dynamicContent: true,
-            emotionalStage: "building_trust"
+            emotionalStage: "building_trust",
+            mobileOptimized: true // MOBILE: flag
         },
         customComponent: "ChatGamingStep"
     },
@@ -636,13 +638,14 @@ export const quizSteps = [
         question: "⚠️ VEJA COMO A MANIPULAÇÃO ESCALA",
         description: "ETAPA 2: Chat Privado - A Armadilha", 
         subtext: "Observe como o predador isola a criança e intensifica a manipulação:",
-        options: ["CONTINUAR PARA O PRÓXIMO CHAT"],
+        options: ["PRÓXIMA FASE (2/3)"], // MOBILE: mais direto
         elements: {
             chatSimulation: true,
             chatType: "private",
             badge: "SIMULAÇÃO REALISTA",
             dynamicContent: true,
-            emotionalStage: "isolating_victim"
+            emotionalStage: "isolating_victim",
+            mobileOptimized: true // MOBILE: flag
         },
         customComponent: "ChatPrivateStep"
     },
@@ -651,13 +654,14 @@ export const quizSteps = [
         question: "🚨 O PONTO DE NÃO RETORNO",
         description: "ETAPA 3: Chat Direto - A Ameaça",
         subtext: "Veja como a manipulação se torna chantagem e ameaça:",
-        options: ["CONTINUAR PARA EDUCAÇÃO"],
+        options: ["PRÓXIMA FASE (3/3)"], // MOBILE: mais direto
         elements: {
             chatSimulation: true,
             chatType: "direct",
             badge: "SIMULAÇÃO REALISTA", 
             dynamicContent: true,
-            emotionalStage: "full_control"
+            emotionalStage: "full_control",
+            mobileOptimized: true // MOBILE: flag
         },
         customComponent: "ChatDirectStep"
     },
@@ -670,7 +674,8 @@ export const quizSteps = [
         elements: {
             educationalContent: true,
             badge: "GUIA COMPLETO",
-            dynamicContent: false
+            dynamicContent: false,
+            mobileOptimized: true // MOBILE: flag
         },
         customComponent: "EducationalStep"
     }
@@ -940,10 +945,10 @@ export const getRandomizedContent = (type: string) => {
     }
 }
 
-// === SISTEMA DE TIMING INTELIGENTE - NÍVEL 3 ===
+// === SISTEMA DE TIMING INTELIGENTE - MOBILE OPTIMIZED ===
 export const calculateRealisticTiming = (character: string, messageLength: number, emotionalState: string) => {
     const profile = characterProfiles[character as keyof typeof characterProfiles]
-    if (!profile) return { delay: 1000, typingDuration: 2000 }
+    if (!profile) return { delay: 800, typingDuration: 1500 } // MOBILE: mais rápido
     
     const baseTypingSpeed = profile.profile.typingSpeed
     const wordsInMessage = messageLength / 5
@@ -957,13 +962,13 @@ export const calculateRealisticTiming = (character: string, messageLength: numbe
         default: speedMultiplier = 1
     }
     
-    const typingDuration = baseTypingTime * speedMultiplier
-    const responseDelay = profile.behaviors.responseTime.min + 
-                         Math.random() * (profile.behaviors.responseTime.max - profile.behaviors.responseTime.min)
+    const typingDuration = baseTypingTime * speedMultiplier * 0.8 // MOBILE: 20% mais rápido
+    const responseDelay = (profile.behaviors.responseTime.min + 
+                         Math.random() * (profile.behaviors.responseTime.max - profile.behaviors.responseTime.min)) * 0.8 // MOBILE: 20% mais rápido
     
     return {
         delay: responseDelay,
-        typingDuration: Math.max(typingDuration, 800)
+        typingDuration: Math.max(typingDuration, 600) // MOBILE: mínimo reduzido
     }
 }
 
