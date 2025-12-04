@@ -618,6 +618,9 @@ export const chatDirectData = {
 export const quizSteps = [
     {
         id: 1,
+        question: "",
+        description: "",
+        subtext: "",
         options: ["CONTINUAR PARA O CHAT"],
         elements: {
             chatSimulation: true,
