@@ -180,7 +180,7 @@ export default function ResultPageLadoEscuro() {
               <div className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 rounded-xl p-6 border border-green-500/50">
                 <div className="flex items-center justify-center gap-2 mb-2">
                   <Users className="w-5 h-5 text-green-400" />
-                  <p className="text-green-300 font-bold text-lg">+9.000 pais</p>
+                  <p className="text-green-300 font-bold text-lg">+8.798 pais</p>
                 </div>
                 <p className="text-green-200 font-semibold">
                   já protegeram seus filhos com este método
