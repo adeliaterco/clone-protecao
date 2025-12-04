@@ -1183,7 +1183,7 @@ export default function QuizStep() {
         </div>
       </div>
 
-      {/* CSS Animations + MOBILE OPTIMIZATIONS */}
+      {/* CSS Animations + MOBILE OPTIMIZATIONS + COR FIX */}
       <style jsx global>{`
         /* === MOBILE-FIRST OPTIMIZATIONS === */
         @media (max-width: 767px) {
@@ -1408,9 +1408,16 @@ export default function QuizStep() {
             margin-bottom: 12px;
           }
           
+          /* ===== FIX DA COR - AQUI ESTÁ A CORREÇÃO ===== */
           .mobile-danger-detail {
             font-size: 11px;
+            color: #d1d5db !important; /* CINZA CLARO LEGÍVEL */
           }
+          
+          .mobile-danger-detail span {
+            color: #d1d5db !important; /* GARANTIR QUE O SPAN TAMBÉM FIQUE CINZA */
+          }
+          /* ============================================== */
           
           /* Warnings */
           .mobile-warnings {
