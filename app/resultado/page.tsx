@@ -231,12 +231,9 @@ export default function ResultPageLadoEscuro() {
 
             <div className="text-center mb-6">
               <h2 className="text-2xl sm:text-3xl font-bold text-white mb-4 break-words">
-                📹 <span className="text-orange-400">COMO PROTEGER</span> SEU FILHO
+                📹 Seu Filho está em perigo <span className="text-orange-400">AGORA</span>
               </h2>
 
-              <p className="text-gray-300 mb-4 text-sm sm:text-base break-words">
-                Descubra o passo a passo completo para implementar proteção imediatamente:
-              </p>
             </div>
 
             {/* VSL */}
@@ -252,6 +249,9 @@ export default function ResultPageLadoEscuro() {
                   </div>
                 </div>
               </div>
+              <p className="text-gray-300 mb-4 text-sm sm:text-base break-words">
+                Descubra o passo a passo completo para implementar proteção imediatamente:
+              </p>
             </div>
 
             {/* Barra de Progresso */}
