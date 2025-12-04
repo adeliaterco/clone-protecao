@@ -1,8 +1,9 @@
 // === QUIZ DATA ADAPTADO NÍVEL 3 - SISTEMA DINÂMICO E INTELIGENTE ===
 
 // === SISTEMA DE PERSONALIZAÇÃO AVANÇADA ===
-function getUserAnswer(questionId) {
-    const answers = window.quizAnswers || {};
+function getUserAnswer(questionId: string) {
+    if (typeof window === 'undefined') return '';
+    const answers = (window as any).quizAnswers || {};
     return answers[questionId] || '';
 }
 
@@ -10,7 +11,7 @@ function getUserGender() {
     return getUserAnswer('question1') || 'PAI/MÃE';
 }
 
-function getPersonalizedContent(content, gender) {
+function getPersonalizedContent(content: any, gender: string) {
     if (typeof content === "string") {
         return content
     }
@@ -32,17 +33,17 @@ export const characterProfiles = {
         name: "M4st3rHelp",
         avatar: "⚠️",
         profile: {
-            typingSpeed: 52, // WPM - rápido mas não suspeito
+            typingSpeed: 52,
             emotionalState: "manipulative",
             tactics: ["friendship", "isolation", "promises", "threats"],
             vocabulary: ["macetes", "dicas", "segredos", "especiais", "top", "massa"],
             age: "adulto_predador"
         },
         behaviors: {
-            responseTime: { min: 800, max: 2400 }, // Responde rápido para parecer interessado
+            responseTime: { min: 800, max: 2400 },
             messageLength: { preferred: "medium", max: 120 },
-            emojiUsage: "minimal", // Predadores usam poucos emojis
-            spellingErrors: 0.02, // Muito baixo - querem parecer confiáveis
+            emojiUsage: "minimal",
+            spellingErrors: 0.02,
             manipulationPatterns: [
                 "ofertar_ajuda",
                 "criar_urgencia", 
@@ -59,15 +60,15 @@ export const characterProfiles = {
         avatar: "✨",
         profile: {
             age: 11,
-            typingSpeed: 28, // Mais lenta - criança
+            typingSpeed: 28,
             emotionalState: "curious_then_scared",
             innocence: 0.9,
             vulnerability: 0.8
         },
         behaviors: {
-            responseTime: { min: 2000, max: 5000 }, // Criança demora mais
-            spellingErrors: 0.12, // Mais erros típicos de criança
-            emojiUsage: "high", // Crianças usam muitos emojis
+            responseTime: { min: 2000, max: 5000 },
+            spellingErrors: 0.12,
+            emojiUsage: "high",
             questionPatterns: ["por quê?", "não entendi", "tá", "ok", "sério?"],
             emotionalProgression: ["curiosa", "confusa", "assustada", "desesperada"]
         }
@@ -78,14 +79,14 @@ export const characterProfiles = {
         name: "ProKillerX",
         avatar: "😈",
         profile: {
-            typingSpeed: 65, // Muito rápido - agressivo
+            typingSpeed: 65,
             emotionalState: "aggressive",
             behavior: "toxic_gamer"
         },
         behaviors: {
-            responseTime: { min: 200, max: 800 }, // Resposta imediata - impulsivo
-            emojiUsage: "aggressive", // "kkkk", "kkkkk"
-            spellingErrors: 0.15, // Digita rápido, erra mais
+            responseTime: { min: 200, max: 800 },
+            emojiUsage: "aggressive",
+            spellingErrors: 0.15,
             toxicPatterns: ["ridicularizar", "diminuir", "atacar_habilidade"]
         }
     },
@@ -101,7 +102,7 @@ export const characterProfiles = {
         },
         behaviors: {
             responseTime: { min: 1000, max: 3000 },
-            manipulationRole: "normalizador", // Faz parecer normal
+            manipulationRole: "normalizador",
             supportsPredator: true
         }
     }
@@ -109,7 +110,6 @@ export const characterProfiles = {
 
 // === SISTEMA DE VARIAÇÕES DINÂMICAS - NÍVEL 3 ===
 export const messageVariations = {
-    // ESTÁGIO 1: PRIMEIRO CONTATO (GAMING)
     predator_approach: [
         "oi {victim}! bem vinda! vem no privado q eu te ensino uns macetes top",
         "eae {victim}! curte o jogo? tenho umas dicas massa, chama no pv", 
@@ -142,7 +142,6 @@ export const messageVariations = {
         "nossa que gameplay trash"
     ],
 
-    // ESTÁGIO 2: CHAT PRIVADO (ISOLAMENTO)
     age_request: [
         "qnts anos vc tem?",
         "qual sua idade? só curiosidade", 
@@ -175,7 +174,6 @@ export const messageVariations = {
         "me empresta tua conta que eu te ajudo a subir de rank"
     ],
 
-    // ESTÁGIO 3: CHAT DIRETO (AMEAÇAS)
     isolation_demand: [
         "não conta pra ninguém q a gnt se fala ok?",
         "isso fica só entre nós, não fala pra ninguém",
@@ -250,17 +248,14 @@ export const emotionalProgression = {
 }
 
 // === GERADOR DE MENSAGENS DINÂMICAS - NÍVEL 3 ===
-export const generateDynamicMessage = (messageType, context = {}) => {
-    const variations = messageVariations[messageType]
+export const generateDynamicMessage = (messageType: string, context: any = {}) => {
+    const variations = messageVariations[messageType as keyof typeof messageVariations]
     if (!variations || variations.length === 0) return "Mensagem não encontrada"
     
-    // Selecionar variação aleatória
     const selectedVariation = variations[Math.floor(Math.random() * variations.length)]
     
-    // Personalizar com contexto
     let personalizedMessage = selectedVariation
     
-    // Substituir placeholders
     if (context.victim) {
         personalizedMessage = personalizedMessage.replace(/{victim}/g, context.victim)
     }
@@ -285,7 +280,6 @@ export const chatGamingData = {
         onlineCount: 247
     },
     
-    // MENSAGENS COM SISTEMA DINÂMICO
     messages: [
         {
             id: 1,
@@ -356,7 +350,6 @@ export const chatGamingData = {
         }
     ],
 
-    // ALERTAS DINÂMICOS
     alerts: [
         {
             id: 1,
@@ -936,7 +929,7 @@ export const socialProofMessages = [
 ]
 
 // === SISTEMA DE RANDOMIZAÇÃO - NÍVEL 3 ===
-export const getRandomizedContent = (type) => {
+export const getRandomizedContent = (type: string) => {
     switch(type) {
         case 'social_proof':
             return socialProofMessages[Math.floor(Math.random() * socialProofMessages.length)]
@@ -948,15 +941,14 @@ export const getRandomizedContent = (type) => {
 }
 
 // === SISTEMA DE TIMING INTELIGENTE - NÍVEL 3 ===
-export const calculateRealisticTiming = (character, messageLength, emotionalState) => {
-    const profile = characterProfiles[character]
+export const calculateRealisticTiming = (character: string, messageLength: number, emotionalState: string) => {
+    const profile = characterProfiles[character as keyof typeof characterProfiles]
     if (!profile) return { delay: 1000, typingDuration: 2000 }
     
-    const baseTypingSpeed = profile.profile.typingSpeed // WPM
-    const wordsInMessage = messageLength / 5 // Aproximação: 5 caracteres por palavra
-    const baseTypingTime = (wordsInMessage / baseTypingSpeed) * 60 * 1000 // Converter para ms
+    const baseTypingSpeed = profile.profile.typingSpeed
+    const wordsInMessage = messageLength / 5
+    const baseTypingTime = (wordsInMessage / baseTypingSpeed) * 60 * 1000
     
-    // Ajustes baseados no estado emocional
     let speedMultiplier = 1
     switch(emotionalState) {
         case 'aggressive': speedMultiplier = 1.3; break
@@ -971,26 +963,26 @@ export const calculateRealisticTiming = (character, messageLength, emotionalStat
     
     return {
         delay: responseDelay,
-        typingDuration: Math.max(typingDuration, 800) // Mínimo 800ms
+        typingDuration: Math.max(typingDuration, 800)
     }
 }
 
 // === EXPOR FUNÇÕES GLOBALMENTE - NÍVEL 3 ===
 if (typeof window !== 'undefined') {
-    window.chatGamingData = chatGamingData;
-    window.chatPrivateData = chatPrivateData;
-    window.chatDirectData = chatDirectData;
-    window.educationalData = educationalData;
-    window.generateDynamicMessage = generateDynamicMessage;
-    window.characterProfiles = characterProfiles;
-    window.calculateRealisticTiming = calculateRealisticTiming;
-    window.getRandomizedContent = getRandomizedContent;
+    (window as any).chatGamingData = chatGamingData;
+    (window as any).chatPrivateData = chatPrivateData;
+    (window as any).chatDirectData = chatDirectData;
+    (window as any).educationalData = educationalData;
+    (window as any).generateDynamicMessage = generateDynamicMessage;
+    (window as any).characterProfiles = characterProfiles;
+    (window as any).calculateRealisticTiming = calculateRealisticTiming;
+    (window as any).getRandomizedContent = getRandomizedContent;
 }
 
 // === SISTEMA DE ANALYTICS AVANÇADO - NÍVEL 3 ===
-export const trackUserBehavior = (action, data = {}) => {
-    if (typeof window !== 'undefined' && window.gtag) {
-        window.gtag('event', action, {
+export const trackUserBehavior = (action: string, data: any = {}) => {
+    if (typeof window !== 'undefined' && (window as any).gtag) {
+        (window as any).gtag('event', action, {
             ...data,
             timestamp: Date.now(),
             session_id: window.sessionStorage.getItem('quiz_session') || 'anonymous'
@@ -1004,16 +996,4 @@ export const generateSessionId = () => {
         window.sessionStorage.setItem('quiz_session', sessionId)
     }
     return sessionId
-}
-
-// === EXPORTAÇÕES FINAIS ===
-export {
-    characterProfiles,
-    messageVariations, 
-    emotionalProgression,
-    generateDynamicMessage,
-    calculateRealisticTiming,
-    getRandomizedContent,
-    trackUserBehavior,
-    generateSessionId
 }
