@@ -618,9 +618,9 @@ export const chatDirectData = {
 export const quizSteps = [
     {
         id: 1,
-        question: "",
-        description: "",
-        subtext: "",
+        question: "🎮 VOCÊ ESTÁ PRESTES A VER O LADO ESCURO DA INTERNET",
+        description: "ETAPA 1: Servidor Gaming - O Primeiro Contato",
+        subtext: "Veja como predadores se aproximam de crianças em servidores de jogos online:",
         options: ["CONTINUAR PARA O CHAT"],
         elements: {
             chatSimulation: true,
