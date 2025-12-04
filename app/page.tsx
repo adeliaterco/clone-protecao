@@ -522,7 +522,7 @@ export default function HomePage() {
             {/* LOGO */}
             <div className="logo-container">
               <Image
-                src="https://comprarplanseguro.shop/wp-content/uploads/2025/10/c2b0ddda-8a7c-4554-a6c9-d57887b06149.webp"
+                src="https://i.ibb.co/C5jyvKZF/Design-sem-nome.webp"
                 alt="Logo O Lado Escuro da Internet"
                 width={120}
                 height={75}
