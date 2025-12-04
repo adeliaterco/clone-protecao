@@ -174,7 +174,7 @@ export default function ResultPageLadoEscuro() {
               </div>
 
               <p className="text-gray-300 mb-6 text-lg font-semibold break-words">
-                Você viu os perigos. Agora tenha acesso ao <strong className="text-orange-400">kit completo</strong> para proteger seus filhos online.
+                Você acabou de descobrir que <strong className="text-orange-400">kit SEU FILHO</strong> está exposto a predadores online <strong className="text-orange-400">NESTE EXATO MOMENTO.</strong> Cada minuto que passa é um risco real à segurança dele."
               </p>
 
               <div className="bg-gradient-to-r from-green-900/40 to-emerald-900/40 rounded-xl p-6 border border-green-500/50">
