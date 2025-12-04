@@ -249,9 +249,6 @@ export default function ResultPageLadoEscuro() {
                   </div>
                 </div>
               </div>
-              <p className="text-gray-300 mb-4 text-sm sm:text-base break-words">
-                Descubra o passo a passo completo para implementar proteção imediatamente:
-              </p>
             </div>
 
             {/* Barra de Progresso */}
