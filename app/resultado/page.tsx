@@ -105,7 +105,7 @@ export default function ResultPageLadoEscuro() {
     })
 
     setTimeout(() => {
-      window.open("https://pay.hotmart.com/Y103259745G?off=scobwn0k", "_blank")
+      window.open("https://pay.hotmart.com/Y103259745G?checkoutMode=10", "_blank")
     }, 100)
   }
 
