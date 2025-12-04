@@ -292,11 +292,11 @@ export default function ResultPageLadoEscuro() {
                   <CardContent className="mobile-offer-padding text-center w-full">
 
                     <div className="bg-yellow-400 text-black font-bold mobile-offer-badge rounded-full inline-block mb-6">
-                      🛡️ KIT COMPLETO DE PROTEÇÃO
+                      🛡️ PROTOCOLO DE EMERGÊNCIA DIGITAL
                     </div>
 
                     <h2 className="text-3xl sm:text-4xl font-black mb-6 text-white break-words">
-                      PROTEJA SEU FILHO AGORA
+                      As Próximas 24 Horas Decidem a Segurança Online do Seu Filho
                     </h2>
 
                     {/* Preço */}
